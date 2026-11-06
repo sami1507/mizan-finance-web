@@ -14,7 +14,7 @@ npm run db:migrate
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000). Register a new account and complete onboarding, or choose **Try the platform / جرّب المنصة** for a separate seeded demo workspace. Each demo visitor receives an isolated database-backed session.
+Open [http://localhost:3000](http://localhost:3000). Register a new account and complete onboarding, or choose **Try the platform / جرّب المنصة** for a separate seeded demo workspace. Each demo visitor receives an isolated database-backed session. Demo sessions expire after 24 hours; run `npx tsx scripts/cleanup-demos.ts` periodically to remove expired demo rows.
 
 Without `DATABASE_URL`, the app uses **PGlite**, a local PostgreSQL engine. Its files are persisted under `data/pglite/`, which is ignored by Git. Reloading the page, signing out and signing in do not clear real account data. Run only one application process against a PGlite directory, and stop the development server before running migration or seed commands against that same directory. The demo is for exploration; do not enter personal information into it.
 
@@ -69,7 +69,7 @@ erDiagram
 - A balance is opening balance + income − expenses + incoming transfers − outgoing transfers. Balances are derived from the ledger, so editing/deleting a transaction cannot leave a stale cached balance.
 - Transfers require two owned accounts with the same currency. One transfer record represents both legs within a database transaction. It is excluded from income and spending.
 - ILS, USD and EUR totals are kept separate. There is no exchange-rate service or implicit currency conversion.
-- Goal contributions earmark existing money. They do not create expenses or reduce total account balances.
+- Goal contributions earmark existing money. They do not create expenses or reduce total account balances. These allocations are bookkeeping, not a spending lock; later spending and transfers remain possible.
 - A budget is scoped to an owner, month, category and currency; its spent amount is derived from matching expenses.
 - Recurring definitions are schedules. Processing due items creates actual ledger entries and advances their next dates. A unique occurrence key prevents processing the same occurrence twice. Monthly/yearly dates clamp to the last valid day of the target month.
 - CSV import validates mapped rows before committing them. Duplicate fingerprints are owner-scoped; repeated rows and repeat imports are skipped. An invalid batch is not partially saved.

@@ -15,7 +15,7 @@ concurrency:
 jobs:
   checks:
     name: Lint, types, data integrity, build and browser flows
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 20
     env:
       NEXT_TELEMETRY_DISABLED: "1"
@@ -47,7 +47,7 @@ jobs:
 
   postgres:
     name: PostgreSQL 17 integration
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     services:
       postgres:
