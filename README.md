@@ -8,6 +8,14 @@ The visual system uses warm ivory surfaces, navy structure and emerald actions. 
 
 Financial records are persisted on the server. `localStorage` is used only for presentation preferences. This application does not connect to banks, execute payments or provide investment advice.
 
+## Test a decision | اختبر قرارك
+
+Open **Test a decision** in the workspace navigation (on mobile, use **More**). Compare a one-time purchase and alternative daily spending over 30, 60 or 90 days. The screen uses your own as-of ledger, future recorded entries and active recurring schedules; it shows both paths, the lowest balance/date, the first reserve breach and a conditional purchase ceiling. Enter additional daily spending explicitly, including zero when appropriate. You can protect existing goal allocations and add a separate cash buffer without counting either as an expense.
+
+The bilingual screen includes an interactive chart, exact daily table, event provenance and **How was this calculated?**. A possible overlap between a manual entry and a recurring schedule blocks results until reviewed. Currency totals stay separate. These are conditional daily closing balances for all accounts of one currency, not a guarantee of intraday or individual-account funds. Assumptions are temporary and reset on reload, currency changes or refreshed financial data; no transactions or schedules are changed. No external setup or migration is needed for this feature.
+
+See the [five-competitor research and three-candidate decision](docs/simulator-research.md) and the [equations, independently solved example and limits](docs/simulator-model.md).
+
 ## Run locally
 
 Requirements: Node.js 22.12 or newer (Node.js 24 is used in CI), npm, and a modern browser. No external service is required for local development.
@@ -85,6 +93,8 @@ src/app/                 Next.js routes and HTTP endpoints
 src/components/          Landing, authentication and finance UI
 src/lib/contracts.ts     Shared API/domain interfaces
 src/lib/finance.ts       Exact money and calendar calculations
+src/lib/simulator.ts     Pure daily scenario engine, exact minor units
+src/components/finance/scenario-simulator.tsx  Bilingual decision sandbox
 src/server/schema.ts     Drizzle PostgreSQL schema
 src/server/db.ts         PostgreSQL/PGlite connection and migrations
 src/server/finance-service.ts  Validated, owner-scoped operations
@@ -124,7 +134,7 @@ No deployment provider or email account is provisioned automatically. Password-r
 
 ## Quality checks
 
-Verified locally on 6 November 2026: lint and TypeScript passed; 34 unit/database tests and 9 production-server browser tests passed. `npm audit` reported zero vulnerabilities after the scoped lint-tool dependency fix. See the repository Actions tab for the result against each pushed commit.
+Verified locally on 7 November 2026: lint, TypeScript and the production build passed; **72 unit/database tests and 12 production-server browser tests passed**. The simulator adds 31 calculation cases, 7 database cases and 3 browser workflows, including signed results, exact breach dates, reversible duplicate review and 320/390/768/1440px Arabic/English light/dark layouts. Browser tests start their own isolated server and refuse to reuse an occupied port; signup fixtures respect the production rate limit. See the repository Actions tab for the result against each pushed commit.
 
 ### Screenshots
 
@@ -133,6 +143,8 @@ These are captures of the running application with isolated sample data, not des
 | Landing | Dashboard | Phone |
 | --- | --- | --- |
 | [Arabic](docs/screenshots/landing-desktop.png) · [English](docs/screenshots/landing-english-desktop.png) | [Arabic](docs/screenshots/dashboard-desktop.png) · [English](docs/screenshots/dashboard-english.png) · [Dark](docs/screenshots/dashboard-dark.png) | [Arabic dashboard](docs/screenshots/dashboard-mobile.png) · [English dashboard](docs/screenshots/dashboard-english-mobile.png) · [English landing](docs/screenshots/landing-english-mobile.png) |
+
+Purchase simulator: [Arabic](docs/screenshots/simulator-arabic.png) · [English](docs/screenshots/simulator-english.png) · [Dark](docs/screenshots/simulator-dark.png) · [Phone](docs/screenshots/simulator-mobile.png). Run `node scripts/capture-simulator.mjs` against the local preview to reproduce these isolated-demo captures.
 
 The GitHub Actions workflow runs lint, type checking, money/calendar tests, PGlite integration tests, a production build and Playwright workflows. A separate job runs the integration suite against PostgreSQL 17. Browser failures upload diagnostic artifacts for seven days.
 

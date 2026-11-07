@@ -1,4 +1,4 @@
-import { and, eq, desc, asc, or } from "drizzle-orm";
+import { and, eq, desc, asc, or, like } from "drizzle-orm";
 import { randomUUID, createHash } from "node:crypto";
 import { z } from "zod";
 import { getDb, type Database } from "./db";
@@ -39,7 +39,7 @@ export async function getSnapshot(userId: string): Promise<Snapshot> {
   await ensureProfile(userId);
   const database = await getDb();
   return database.transaction(async db => {
-  const [[owner], [profile], accounts, categories, transactions, transfers, budgets, goals, contributions, recurring, notes] = await Promise.all([
+  const [[owner], [profile], accounts, categories, transactions, transfers, budgets, goals, contributions, recurring, notes, processedRecurringEvents] = await Promise.all([
     db.select().from(s.user).where(eq(s.user.id, userId)),
     db.select().from(s.profiles).where(eq(s.profiles.userId, userId)),
     db.select().from(s.financialAccounts).where(eq(s.financialAccounts.userId, userId)).orderBy(asc(s.financialAccounts.name)),
@@ -51,9 +51,10 @@ export async function getSnapshot(userId: string): Promise<Snapshot> {
     db.select().from(s.contributions).where(eq(s.contributions.userId, userId)),
     db.select().from(s.recurring).where(eq(s.recurring.userId, userId)).orderBy(asc(s.recurring.nextDate)),
     db.select().from(s.notes).where(eq(s.notes.userId, userId)).orderBy(desc(s.notes.createdAt)),
+    db.select({ key: s.processedEvents.key }).from(s.processedEvents).where(and(eq(s.processedEvents.userId, userId), like(s.processedEvents.key, "recurring:%"))).orderBy(asc(s.processedEvents.key)),
   ]);
   if (!owner || !profile) throw new v.ServiceError("Session expired. Please sign in again.", 401);
-  const cleanTransactions: Transaction[] = transactions.map(({ id, accountId, categoryId, kind, amount, currency, date, note }) => ({ id, accountId, categoryId, kind: kind as Transaction["kind"], amount, currency: currency as Currency, date, note }));
+  const cleanTransactions: Transaction[] = transactions.map(({ id, accountId, categoryId, kind, amount, currency, date, note, sourceKey }) => ({ id, accountId, categoryId, kind: kind as Transaction["kind"], amount, currency: currency as Currency, date, note, sourceKey }));
   const cleanTransfers: Transfer[] = transfers.map(({ id, fromAccountId, toAccountId, amount, date, note }) => ({ id, fromAccountId, toAccountId, amount, date, note }));
   return {
     profile: { id: userId, name: owner.name, email: owner.email, locale: profile.locale as Locale, currency: profile.currency as Currency, timezone: profile.timezone, onboarded: profile.onboarded },
@@ -65,6 +66,7 @@ export async function getSnapshot(userId: string): Promise<Snapshot> {
     contributions: contributions.map(({ id, goalId, accountId, amount, date }) => ({ id, goalId, accountId, amount, date })),
     recurring: recurring.map(({ id, name, accountId, categoryId, kind, amount, currency, frequency, nextDate, active }) => ({ id, name, accountId, categoryId, kind: kind as Recurring["kind"], amount, currency: currency as Currency, frequency: frequency as Recurring["frequency"], nextDate, active })),
     notes: notes.map(({ id, title, body, createdAt }) => ({ id, title, body, createdAt: createdAt.toISOString() })),
+    processedRecurringKeys: processedRecurringEvents.map(event => event.key),
     demo: owner.demo,
   };
   }, { isolationLevel: "repeatable read", accessMode: "read only" });

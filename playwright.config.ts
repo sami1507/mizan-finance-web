@@ -21,7 +21,8 @@ export default defineConfig({
   webServer: {
     command: `npm run ${process.env.PLAYWRIGHT_USE_PRODUCTION === "true" ? "start" : "dev"} -- --port ${port}`,
     url: baseURL,
-    reuseExistingServer: !process.env.CI,
+    // Never run mutation tests against an already-running, potentially real database.
+    reuseExistingServer: false,
     timeout: 180_000,
     env: {
       DATABASE_URL: "",

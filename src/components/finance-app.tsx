@@ -4,7 +4,7 @@ import Link from "next/link";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { ArrowDownLeft, ArrowLeftRight, ArrowUpRight, Bell, CalendarDays, Check, ChevronLeft, ChevronRight, CircleHelp, Download, Ellipsis, Globe2, LayoutDashboard, LogOut, Menu, Moon, MoreHorizontal, Plus, Search, Settings2, ShieldCheck, Lightbulb, Sun, Target, Trash2, TrendingUp, Wallet, X, CreditCard, ChartNoAxesCombined, FileText, Layers3, Pencil, Play, Pause, Upload, CheckCircle2, AlertCircle, Info, PiggyBank } from "lucide-react";
+import { ArrowDownLeft, ArrowLeftRight, ArrowUpRight, Bell, CalendarDays, Check, ChevronLeft, ChevronRight, CircleHelp, SlidersHorizontal, Download, Ellipsis, Globe2, LayoutDashboard, LogOut, Menu, Moon, MoreHorizontal, Plus, Search, Settings2, ShieldCheck, Lightbulb, Sun, Target, Trash2, TrendingUp, Wallet, X, CreditCard, ChartNoAxesCombined, FileText, Layers3, Pencil, Play, Pause, Upload, CheckCircle2, AlertCircle, Info, PiggyBank } from "lucide-react";
 import type { Currency, Locale, Snapshot, Transaction } from "@/lib/contracts";
 import { hasStoredLocale, usePreferences } from "@/components/providers";
 import { categoryLabel, dateLabel, major, minor, money, monthlyRows, sum, thisMonth, today } from "./finance/utils";
@@ -12,6 +12,7 @@ import "./finance.css";
 
 const CashflowChart = dynamic(() => import("./finance/charts").then((m) => m.CashflowChart), { loading: () => <div className="chart-empty" aria-busy="true">…</div> });
 const SpendingChart = dynamic(() => import("./finance/charts").then((m) => m.SpendingChart), { loading: () => <div className="chart-empty" aria-busy="true">…</div> });
+const ScenarioSimulator = dynamic(() => import("./finance/scenario-simulator"));
 const ImportPanel = dynamic(() => import("./finance/import-panel").then((m) => m.ImportPanel));
 
 type T = (ar: string, en: string) => string;
@@ -20,7 +21,7 @@ interface DialogSpec { title: string; action: string; fields: Field[]; values?: 
 interface Ctx { data: Snapshot; locale: Locale; t: T; currency: Currency; setCurrency: (c: Currency) => void; mutate: (body: Record<string, unknown>) => Promise<void>; open: (d: DialogSpec) => void; busy: boolean; }
 const currencyOptions = ["ILS", "USD", "EUR"].map((c) => ({ value: c, label: c }));
 const nav = [
-  ["dashboard", "نظرة عامة", "Overview", LayoutDashboard], ["transactions", "المعاملات", "Transactions", ArrowLeftRight], ["accounts", "الحسابات", "Accounts", Wallet], ["budgets", "الميزانيات", "Budgets", Layers3], ["goals", "أهداف الادخار", "Savings goals", Target], ["recurring", "الاشتراكات", "Recurring", CreditCard], ["reports", "التقارير", "Reports", ChartNoAxesCombined], ["insights", "الملاحظات المالية", "Money insights", Lightbulb],
+  ["dashboard", "نظرة عامة", "Overview", LayoutDashboard], ["transactions", "المعاملات", "Transactions", ArrowLeftRight], ["accounts", "الحسابات", "Accounts", Wallet], ["budgets", "الميزانيات", "Budgets", Layers3], ["goals", "أهداف الادخار", "Savings goals", Target], ["recurring", "الاشتراكات", "Recurring", CreditCard], ["reports", "التقارير", "Reports", ChartNoAxesCombined], ["simulator", "اختبر قرارك", "Test a decision", SlidersHorizontal], ["insights", "الملاحظات المالية", "Money insights", Lightbulb],
 ] as const;
 
 function accountOptions(data: Snapshot, currency?: Currency) { return data.accounts.filter((a) => !currency || a.currency === currency).map((a) => ({ value: a.id, label: `${a.name} · ${a.currency}` })); }
@@ -49,6 +50,7 @@ export default function FinanceApp({ section = "dashboard" }: { section?: string
   const { locale, setLocale, theme, setTheme, t } = usePreferences();
   const router = useRouter();
   const [data, setData] = useState<Snapshot | null>(null);
+  const [dataVersion, setDataVersion] = useState(0);
   const [error, setError] = useState("");
   const [notice, setNotice] = useState("");
   const [busy, setBusy] = useState(false);
@@ -60,7 +62,7 @@ export default function FinanceApp({ section = "dashboard" }: { section?: string
     if (!workspace) { router.replace("/login"); return; }
     if (!workspace.profile.onboarded) { router.replace("/onboarding"); return; }
     if (!hasStoredLocale()) setLocale(workspace.profile.locale);
-    setData(workspace); setCurrency(workspace.profile.currency); setError("");
+    setData(workspace); setDataVersion((version) => version + 1); setCurrency(workspace.profile.currency); setError("");
   }, [router, setLocale]);
   const refresh = useCallback(() => loadWorkspace().then(acceptWorkspace).catch((err: unknown) => {
     setError(err instanceof Error ? err.message : String(err));
@@ -97,7 +99,7 @@ export default function FinanceApp({ section = "dashboard" }: { section?: string
       const response = await fetch("/api/finance", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
       const result = await response.json();
       if (!response.ok) throw new Error(result.error || t("تعذر حفظ التغييرات", "Could not save changes"));
-      setData(result); setNotice(body.action === "import.commit" ? t(`تم استيراد ${result.imported ?? 0}، وتجاوز ${result.skipped ?? 0} من المكررات`, `Imported ${result.imported ?? 0}; skipped ${result.skipped ?? 0} duplicates`) : t("تم حفظ التغييرات بنجاح", "Your changes have been saved"));
+      setData(result); setDataVersion((version) => version + 1); setNotice(body.action === "import.commit" ? t(`تم استيراد ${result.imported ?? 0}، وتجاوز ${result.skipped ?? 0} من المكررات`, `Imported ${result.imported ?? 0}; skipped ${result.skipped ?? 0} duplicates`) : t("تم حفظ التغييرات بنجاح", "Your changes have been saved"));
     } catch (err) { const message = err instanceof Error ? err.message : String(err); setError(message); throw err; } finally { setBusy(false); }
   }
   const title = section === "settings" ? t("الإعدادات", "Settings") : nav.find((n) => n[0] === section)?.[locale === "ar" ? 1 : 2] || t("نظرة عامة", "Overview");
@@ -127,7 +129,7 @@ export default function FinanceApp({ section = "dashboard" }: { section?: string
       <main id="main-content" className="app-content">
         {error && <div className="feedback error" role="alert"><AlertCircle size={18} /><span>{error}</span><button className="text-button" onClick={() => void refresh()}>{t("أعد المحاولة", "Try again")}</button></div>}
         {!data ? <div className={error ? "load-failed" : "loading-page"} aria-busy={!error}><div className="skeleton skeleton-title" /><div className="stats-grid">{[1, 2, 3, 4].map((i) => <div key={i} className="skeleton skeleton-card" />)}</div><div className="skeleton skeleton-chart" /><p>{t("جارٍ تحميل حساباتك…", "Loading your accounts…")}</p></div> : ctx && <>
-          <div className="page-heading"><div><span className="eyebrow">{section === "dashboard" ? t("ملخص حساباتك", "Account summary") : t("إدارة حساباتك", "Your workspace")}</span><h1>{section === "dashboard" ? <>{t("أهلًا، ", "Hello, ")}{data.profile.name.split(" ")[0]}<span className="greeting-dot">.</span></> : title}</h1><p>{section === "dashboard" ? t("أرصدتك ومعاملاتك والتزاماتك لهذا الشهر.", "Your balances, transactions and upcoming payments.") : sectionDescription(section, t)}</p></div><div className="heading-actions">{["dashboard", "reports", "insights"].includes(section) && <label className="currency-picker"><span className="sr-only">{t("عملة العرض", "Display currency")}</span><select value={currency} onChange={(e) => setCurrency(e.target.value as Currency)}>{currencyOptions.map((o) => <option key={o.value}>{o.value}</option>)}</select></label>}<button className="btn btn-primary" data-testid="add-transaction" onClick={() => setDialog(transactionDialog(ctx))} disabled={!data.accounts.length}><Plus size={18} />{t("إضافة معاملة", "Add transaction")}</button></div></div>
+          <div className="page-heading"><div><span className="eyebrow">{section === "dashboard" ? t("ملخص حساباتك", "Account summary") : t("إدارة حساباتك", "Your workspace")}</span><h1>{section === "dashboard" ? <>{t("أهلًا، ", "Hello, ")}{data.profile.name.split(" ")[0]}<span className="greeting-dot">.</span></> : title}</h1><p>{section === "dashboard" ? t("أرصدتك ومعاملاتك والتزاماتك لهذا الشهر.", "Your balances, transactions and upcoming payments.") : sectionDescription(section, t)}</p></div><div className="heading-actions">{["dashboard", "reports", "insights", "simulator"].includes(section) && <label className="currency-picker"><span className="sr-only">{t("عملة العرض", "Display currency")}</span><select value={currency} onChange={(e) => setCurrency(e.target.value as Currency)}>{currencyOptions.map((o) => <option key={o.value}>{o.value}</option>)}</select></label>}<button className="btn btn-primary" data-testid="add-transaction" onClick={() => setDialog(transactionDialog(ctx))} disabled={!data.accounts.length}><Plus size={18} />{t("إضافة معاملة", "Add transaction")}</button></div></div>
           {section === "dashboard" && <Dashboard ctx={ctx} />}
           {section === "transactions" && <Transactions ctx={ctx} />}
           {section === "accounts" && <Accounts ctx={ctx} />}
@@ -135,6 +137,7 @@ export default function FinanceApp({ section = "dashboard" }: { section?: string
           {section === "goals" && <Goals ctx={ctx} />}
           {section === "recurring" && <RecurringView ctx={ctx} />}
           {section === "reports" && <Reports ctx={ctx} />}
+          {section === "simulator" && <ScenarioSimulator key={`${currency}:${dataVersion}`} data={data} locale={locale} currency={currency} t={t} />}
           {section === "insights" && <Insights ctx={ctx} />}
           {section === "settings" && <Settings ctx={ctx} />}
           <footer className="app-footer"><span>© {new Date().getFullYear()} {t("ميزان لإدارة المال الشخصي", "Mizan Finance")}</span><span><ShieldCheck size={13} />{t("بياناتك تخصّك وحدك", "Your data belongs to you")}</span></footer>
@@ -147,7 +150,7 @@ export default function FinanceApp({ section = "dashboard" }: { section?: string
   </div>;
 }
 
-function sectionDescription(section: string, t: T) { const descriptions: Record<string, [string, string]> = { transactions: ["كل حركة مالية، في صورة واضحة.", "Every money move, clearly in view."], accounts: ["أموالك موزّعة، وصورتها هنا متكاملة.", "Your money may live in different places. Its story lives here."], budgets: ["امنح كل مصروف مساحة، وكل شهر خطة.", "Give your spending a little structure."], goals: ["الأشياء التي تهمك، أقرب خطوة بخطوة.", "Make space for the things that matter."], recurring: ["اعرف ما هو قادم قبل موعده.", "Know what’s coming, before it arrives."], reports: ["افهم أنماطك المالية، بالأرقام.", "A clearer understanding of your money habits."], insights: ["ملاحظات محسوبة، مستندة إلى بياناتك.", "Thoughtful observations, grounded in your numbers."], settings: ["مساحتك، على طريقتك.", "Your workspace. Your preferences."] }; return t(...(descriptions[section] || ["", ""])); }
+function sectionDescription(section: string, t: T) { const descriptions: Record<string, [string, string]> = { simulator: ["قارن أثر الشراء على أموالك خلال 30 أو 60 أو 90 يومًا.", "Compare a purchase and daily spending over 30, 60 or 90 days."], transactions: ["كل حركة مالية، في صورة واضحة.", "Every money move, clearly in view."], accounts: ["أموالك موزّعة، وصورتها هنا متكاملة.", "Your money may live in different places. Its story lives here."], budgets: ["امنح كل مصروف مساحة، وكل شهر خطة.", "Give your spending a little structure."], goals: ["الأشياء التي تهمك، أقرب خطوة بخطوة.", "Make space for the things that matter."], recurring: ["اعرف ما هو قادم قبل موعده.", "Know what’s coming, before it arrives."], reports: ["افهم أنماطك المالية، بالأرقام.", "A clearer understanding of your money habits."], insights: ["ملاحظات محسوبة، مستندة إلى بياناتك.", "Thoughtful observations, grounded in your numbers."], settings: ["مساحتك، على طريقتك.", "Your workspace. Your preferences."] }; return t(...(descriptions[section] || ["", ""])); }
 
 function FormDialog({ spec, ctx, close }: { spec: DialogSpec; ctx: Ctx; close: () => void }) {
   const dialogRef = useRef<HTMLDialogElement>(null);
