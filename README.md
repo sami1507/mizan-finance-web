@@ -20,6 +20,16 @@ The screen is available in all four languages and includes an interactive chart,
 
 See the [five-competitor research and three-candidate decision](docs/simulator-research.md) and the [equations, independently solved example and limits](docs/simulator-model.md).
 
+## Monthly savings capacity | حاسبة الادخار
+
+Open **Savings capacity** at `/app/savings` (on mobile, open **More**). Enter monthly take-home income, add itemized monthly expenses, and optionally keep a separate cash reserve. The result updates as you edit: maximum saving is `max(income − expenses, 0)`; saving after the reserve is `max(income − expenses − reserve, 0)`. A shortfall is shown separately, and a zero income has no percentage rate. For example, income of 8,000 and expenses of 5,000 leaves 3,000 (37.5%); keeping a reserve of 500 leaves 2,500 available to save.
+
+**Use recorded month** explicitly replaces the income and expense inputs with the selected calendar month's recorded transactions in one currency. Expenses are grouped by category, including any future-dated entries already recorded in that month. Transfers, goal allocations, budgets, opening balances and unposted recurring schedules are not added. Review the imported figures for missing costs and income, especially during an unfinished month. Enter yearly or irregular costs as your own monthly provision if you want to allow for them.
+
+These are conditional estimates, not a guarantee that all expenses have been included or that income will repeat. Calculator assumptions are temporary and reset on reload, currency changes or refreshed financial data; they do not post ledger transactions and are not written to browser storage. Actual recorded financial data remains in the database. No additional service, dependency or migration is required. See the [calculation model and independently solved examples](docs/savings-capacity-model.md).
+
+Real calculator captures: [Arabic](docs/screenshots/savings-ar-desktop.png), [English](docs/screenshots/savings-en-desktop.png), [Hebrew](docs/screenshots/savings-he-desktop.png), [German](docs/screenshots/savings-de-desktop.png), [phone](docs/screenshots/savings-ar-mobile.png), and [dark mode](docs/screenshots/savings-en-dark.png). Run `node scripts/capture-savings.mjs` against a running local preview to reproduce them with isolated demo sessions and the 8,000/5,000/500 example above.
+
 ## Run locally
 
 Requirements: Node.js 22.12 or newer (Node.js 24 is used in CI), npm, and a modern browser. No external service is required for local development.
@@ -114,6 +124,7 @@ src/lib/finance.ts       Exact money and calendar calculations
 src/lib/i18n.ts          Locale, direction, formatting and message helpers
 src/lib/locales/         Hebrew/German message catalogs with stable keys
 src/lib/simulator.ts     Pure daily scenario engine, exact minor units
+src/lib/savings-capacity.ts  Pure monthly savings calculation and ledger grouping
 src/components/finance/scenario-simulator.tsx  Four-language decision sandbox
 src/server/schema.ts     Drizzle PostgreSQL schema
 src/server/db.ts         PostgreSQL/PGlite connection and migrations
@@ -154,7 +165,7 @@ No deployment provider or email account is provisioned automatically. Password-r
 
 ## Quality checks
 
-Verified locally on 7 November 2026: lint, TypeScript, the production build, **134 unit/database tests and 15 production-server browser tests passed**. Browser coverage includes real Hebrew/German signup and onboarding, exact localized amount input, saved-language restoration, every workspace section, translated simulator values, unchanged results when switching DE→EN→HE→DE, and 320/390px light/dark layouts, alongside the existing Arabic/English workflows. Actual landing, dashboard and simulator captures were visually reviewed with isolated demo data. Browser tests start their own isolated server and refuse to reuse an occupied port; signup fixtures respect the production rate limit. See the repository Actions tab for the result against each pushed commit.
+Verified locally on 8 November 2026: lint, TypeScript, the production build, **187 unit/database tests and 18 production-server browser tests passed**. The savings calculator adds 53 exact calculation and ledger-selection cases plus 3 browser workflows: manual item editing, shortfalls and zero income, replacement from actual monthly records, currency isolation, temporary inputs without ledger/storage writes, and keyboard navigation. All four languages and both themes were checked at 320/390/768/1440px. Existing authentication, financial integrity, imports, localization and purchase-simulator flows also passed. Actual calculator screenshots were visually reviewed with isolated demo data. Browser tests use their own server/database and respect the production signup rate limit. See the repository Actions tab for the result against each pushed commit.
 
 ### Screenshots
 
