@@ -110,10 +110,13 @@ test("each demo visitor has isolated persisted data", async () => {
   const a = await request.newContext({ baseURL: origin, extraHTTPHeaders: { Origin: origin } });
   const b = await request.newContext({ baseURL: origin, extraHTTPHeaders: { Origin: origin } });
   expect((await a.post("/api/demo", { data: {} })).ok()).toBe(true);
-  expect((await b.post("/api/demo", { data: {} })).ok()).toBe(true);
+  expect((await b.post("/api/demo", { data: { locale: "en" } })).ok()).toBe(true);
   const first = await snapshot(a);
   const second = await snapshot(b);
   expect(first.demo).toBe(true);
+  expect(first.profile.locale).toBe("ar");
+  expect(second.profile.locale).toBe("en");
+  expect(second.profile.name).toBe("Sara");
   expect(first.profile.id).not.toBe(second.profile.id);
   expect(first.accounts[0].id).not.toBe(second.accounts[0].id);
   await change(a, "note.create", { title: "Private demo note", body: "Only visitor A sees this." });

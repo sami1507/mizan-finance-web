@@ -2,6 +2,8 @@
 
 A bilingual personal finance application built with Next.js, TypeScript, Tailwind CSS, Drizzle ORM and Better Auth. Arabic/RTL is the default, with English/LTR, light/dark themes and ILS/USD/EUR support.
 
+Use the **English / العربية** button in the page header to switch languages. The preference persists across navigation and reloads; a new browser uses your saved account language after signing in. Select English before opening the demo to create English sample accounts, goals and notes. User-entered financial content is never automatically translated.
+
 Financial records are persisted on the server. `localStorage` is used only for presentation preferences. This application does not connect to banks, execute payments or provide investment advice.
 
 ## Run locally
@@ -128,7 +130,7 @@ These are captures of the running application with isolated sample data, not des
 
 | Landing | Dashboard | Phone |
 | --- | --- | --- |
-| [Desktop](docs/screenshots/landing-desktop.png) | [Arabic](docs/screenshots/dashboard-desktop.png) · [English](docs/screenshots/dashboard-english.png) · [Dark](docs/screenshots/dashboard-dark.png) | [Dashboard](docs/screenshots/dashboard-mobile.png) · [Landing](docs/screenshots/landing-mobile.png) |
+| [Arabic](docs/screenshots/landing-desktop.png) · [English](docs/screenshots/landing-english-desktop.png) | [Arabic](docs/screenshots/dashboard-desktop.png) · [English](docs/screenshots/dashboard-english.png) · [Dark](docs/screenshots/dashboard-dark.png) | [Arabic dashboard](docs/screenshots/dashboard-mobile.png) · [English dashboard](docs/screenshots/dashboard-english-mobile.png) · [English landing](docs/screenshots/landing-english-mobile.png) |
 
 The GitHub Actions workflow runs lint, type checking, money/calendar tests, PGlite integration tests, a production build and Playwright workflows. A separate job runs the integration suite against PostgreSQL 17. Browser failures upload diagnostic artifacts for seven days.
 

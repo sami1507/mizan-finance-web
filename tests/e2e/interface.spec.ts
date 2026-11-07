@@ -44,6 +44,12 @@ test("a new user registers, completes onboarding, records money and signs in aga
   expect(data.accounts[0].balance).toBe(670_000);
   expect(data.transactions.some(transaction => transaction.note === "Browser groceries")).toBe(true);
 
+  // A fresh browser preference falls back to the saved account language after login.
+  await page.evaluate(() => localStorage.removeItem("mizan-locale"));
+  await page.reload();
+  await expect(page.locator("html")).toHaveAttribute("lang", "en");
+  await expect(page.locator(".finance-app")).toHaveAttribute("dir", "ltr");
+
   await page.getByTestId("nav-settings").click();
   await page.getByPlaceholder("DELETE", { exact: true }).fill("DELETE");
   await page.getByRole("button", { name: "Permanently delete my account", exact: true }).click();
@@ -54,11 +60,16 @@ test("a new user registers, completes onboarding, records money and signs in aga
 test("demo UI creates an expense, budget and goal, persists changes, and exports a report", async ({ page }) => {
   const runtimeErrors: string[] = [];
   page.on("pageerror", error => runtimeErrors.push(error.message));
-  await page.goto("/demo");
+  await page.goto("/");
+  await page.getByRole("button", { name: "Switch to English", exact: true }).click();
+  await expect(page.getByRole("heading", { level: 1 })).toContainText("Money made clear.");
+  await page.getByRole("link", { name: "Explore the demo", exact: true }).click();
   await expect(page.getByTestId("add-transaction")).toBeVisible({ timeout: 60_000 });
-  await expect(page.locator(".finance-app")).toHaveAttribute("dir", "rtl");
-  await page.getByTestId("language-toggle").click();
   await expect(page.locator(".finance-app")).toHaveAttribute("dir", "ltr");
+  await expect(page.getByRole("heading", { level: 1 })).toContainText("Hello, Sara");
+  const demo = await (await page.request.get("/api/finance")).json() as Snapshot;
+  expect(demo.profile.locale).toBe("en");
+  expect(demo.accounts.some(account => account.name === "Main account")).toBe(true);
 
   await page.getByTestId("add-transaction").click();
   const dialog = page.getByRole("dialog");
