@@ -1,10 +1,14 @@
 # Mizan Finance | ميزان
 
-A bilingual personal finance application built with Next.js, TypeScript, Tailwind CSS, Drizzle ORM and Better Auth. Arabic/RTL is the default, with English/LTR, light/dark themes and ILS/USD/EUR support.
+A four-language personal finance application built with Next.js, TypeScript, Tailwind CSS, Drizzle ORM and Better Auth. Arabic is the default; Arabic and Hebrew use RTL, while English and German use LTR. All four languages support light/dark themes and ILS/USD/EUR.
 
-Use the **English / العربية** button in the page header to switch languages. The preference persists across navigation and reloads; a new browser uses your saved account language after signing in. Select English before opening the demo to create English sample accounts, goals and notes. User-entered financial content is never automatically translated.
+Use the native **Language** selector in the page header or profile settings to choose **العربية**, **English**, **עברית** or **Deutsch**. The presentation preference persists across navigation and reloads. Save your profile settings to retain the account language on the server; a browser without a local language preference restores it after sign-in. Select a language before opening a new demo to create sample accounts, goals and notes in that language. Existing user-entered names, descriptions, notes and financial content are preserved and never automatically translated.
 
-The visual system uses warm ivory surfaces, navy structure and emerald actions. Arabic uses locally bundled Noto Sans Arabic; English uses DM Sans. Financial figures use tabular numerals, primary buttons and form fields use a consistent 44px minimum control height, and light/dark themes share explicit color and focus tokens.
+The visual system uses warm ivory surfaces, navy structure and emerald actions. Fonts are locally bundled: Noto Sans Arabic for Arabic, Noto Sans Hebrew for Hebrew, and DM Sans for English and German. Financial figures use tabular numerals, primary buttons and form fields use a consistent 44px minimum control height, and light/dark themes share explicit color and focus tokens.
+
+Amounts, dates and built-in category labels follow the selected locale. German amount fields accept ungrouped decimal commas such as `123,45`, as well as the canonical decimal-point form `123.45`; edit fields display the comma form. Do not enter thousands separators: ambiguous grouped values such as `1.234,56`, `1,234.56` or `1 234,56` are rejected instead of being guessed. The database and API continue to use exact integer minor units.
+
+For existing installations, `npm run db:migrate` applies [`0003_profile_locales.sql`](drizzle/0003_profile_locales.sql), which expands the saved-language constraint to `ar`, `en`, `he` and `de` without changing existing choices or financial data. Interface validation and API errors are localized; password-reset email templates use the saved account language. Actual email delivery still requires the SMTP configuration described below.
 
 Financial records are persisted on the server. `localStorage` is used only for presentation preferences. This application does not connect to banks, execute payments or provide investment advice.
 
@@ -12,7 +16,7 @@ Financial records are persisted on the server. `localStorage` is used only for p
 
 Open **Test a decision** in the workspace navigation (on mobile, use **More**). Compare a one-time purchase and alternative daily spending over 30, 60 or 90 days. The screen uses your own as-of ledger, future recorded entries and active recurring schedules; it shows both paths, the lowest balance/date, the first reserve breach and a conditional purchase ceiling. Enter additional daily spending explicitly, including zero when appropriate. You can protect existing goal allocations and add a separate cash buffer without counting either as an expense.
 
-The bilingual screen includes an interactive chart, exact daily table, event provenance and **How was this calculated?**. A possible overlap between a manual entry and a recurring schedule blocks results until reviewed. Currency totals stay separate. These are conditional daily closing balances for all accounts of one currency, not a guarantee of intraday or individual-account funds. Assumptions are temporary and reset on reload, currency changes or refreshed financial data; no transactions or schedules are changed. No external setup or migration is needed for this feature.
+The screen is available in all four languages and includes an interactive chart, exact daily table, event provenance and **How was this calculated?**. A possible overlap between a manual entry and a recurring schedule blocks results until reviewed. Currency totals stay separate. These are conditional daily closing balances for all accounts of one currency, not a guarantee of intraday or individual-account funds. Assumptions are temporary and reset on reload, currency changes or refreshed financial data; no transactions or schedules are changed. No external setup or migration is needed for the simulator itself.
 
 See the [five-competitor research and three-candidate decision](docs/simulator-research.md) and the [equations, independently solved example and limits](docs/simulator-model.md).
 
@@ -57,6 +61,20 @@ Playwright starts its own development server on port 3100 and uses `data/e2e`. A
 
 Set `PLAYWRIGHT_USE_PRODUCTION=true` after `npm run build` to run browser checks against the production server; CI uses this mode. `node scripts/capture.mjs` captures demo-only delivery images and real dashboard previews from a running server on port 3000 (`CAPTURE_URL` overrides it).
 
+To regenerate all four languages' real dashboard previews and page captures, first run the production preview with the database configuration described below. In another terminal, run:
+
+```sh
+node scripts/capture-locales.mjs previews
+```
+
+This writes desktop/mobile and light/dark dashboard previews under `public/`, plus dashboard screenshots under `docs/screenshots/`. Stop and restart the production preview with `npm start` so Next.js indexes the newly generated public files, then capture the landing pages and simulator:
+
+```sh
+node scripts/capture-locales.mjs pages
+```
+
+Both phases use isolated demo sessions. `CAPTURE_URL` can select another local preview URL; the default is `http://localhost:3000`. Install Playwright Chromium before running either phase.
+
 ## Data model and financial rules
 
 ```mermaid
@@ -84,7 +102,7 @@ erDiagram
 - Goal contributions earmark existing money. They do not create expenses or reduce total account balances. These allocations are bookkeeping, not a spending lock; later spending and transfers remain possible.
 - A budget is scoped to an owner, month, category and currency; its spent amount is derived from matching expenses.
 - Recurring definitions are schedules. Processing due items creates actual ledger entries and advances their next dates. A unique occurrence key prevents processing the same occurrence twice. Monthly/yearly dates clamp to the last valid day of the target month.
-- CSV import validates mapped rows before committing them. Duplicate fingerprints are owner-scoped; repeated rows and repeat imports are skipped. An invalid batch is not partially saved.
+- CSV import validates mapped rows before committing them. Explicit account/category IDs take precedence over names; ambiguous names require correction before saving. Duplicate fingerprints are owner-scoped; repeated rows and repeat imports are skipped. An invalid batch is not partially saved.
 
 ## Architecture
 
@@ -93,8 +111,10 @@ src/app/                 Next.js routes and HTTP endpoints
 src/components/          Landing, authentication and finance UI
 src/lib/contracts.ts     Shared API/domain interfaces
 src/lib/finance.ts       Exact money and calendar calculations
+src/lib/i18n.ts          Locale, direction, formatting and message helpers
+src/lib/locales/         Hebrew/German message catalogs with stable keys
 src/lib/simulator.ts     Pure daily scenario engine, exact minor units
-src/components/finance/scenario-simulator.tsx  Bilingual decision sandbox
+src/components/finance/scenario-simulator.tsx  Four-language decision sandbox
 src/server/schema.ts     Drizzle PostgreSQL schema
 src/server/db.ts         PostgreSQL/PGlite connection and migrations
 src/server/finance-service.ts  Validated, owner-scoped operations
@@ -130,11 +150,11 @@ npm start
 
 The application also applies pending migrations when it opens the database. PostgreSQL migration execution uses an advisory lock so application processes do not apply the same migration simultaneously. Deploy the `drizzle` directory with the application. For a single-process local production preview only, `ALLOW_LOCAL_DB=true` permits PGlite with `npm start`; do not use this mode for multi-instance or serverless production.
 
-No deployment provider or email account is provisioned automatically. Password-reset delivery requires an SMTP service. Without that configuration, the interface must report the missing setup rather than claim to have sent mail.
+No deployment provider or email account is provisioned automatically. Password-reset delivery requires `SMTP_URL` and `MAIL_FROM`. The subject and message template follow the saved profile language; translated templates do not constitute an email-service integration. Without SMTP configuration, the interface reports that recovery is unavailable rather than claiming to have sent mail.
 
 ## Quality checks
 
-Verified locally on 7 November 2026: lint, TypeScript and the production build passed; **72 unit/database tests and 12 production-server browser tests passed**. The simulator adds 31 calculation cases, 7 database cases and 3 browser workflows, including signed results, exact breach dates, reversible duplicate review and 320/390/768/1440px Arabic/English light/dark layouts. Browser tests start their own isolated server and refuse to reuse an occupied port; signup fixtures respect the production rate limit. See the repository Actions tab for the result against each pushed commit.
+Verified locally on 7 November 2026: lint, TypeScript, the production build, **134 unit/database tests and 15 production-server browser tests passed**. Browser coverage includes real Hebrew/German signup and onboarding, exact localized amount input, saved-language restoration, every workspace section, translated simulator values, unchanged results when switching DE→EN→HE→DE, and 320/390px light/dark layouts, alongside the existing Arabic/English workflows. Actual landing, dashboard and simulator captures were visually reviewed with isolated demo data. Browser tests start their own isolated server and refuse to reuse an occupied port; signup fixtures respect the production rate limit. See the repository Actions tab for the result against each pushed commit.
 
 ### Screenshots
 
@@ -145,6 +165,13 @@ These are captures of the running application with isolated sample data, not des
 | [Arabic](docs/screenshots/landing-desktop.png) · [English](docs/screenshots/landing-english-desktop.png) | [Arabic](docs/screenshots/dashboard-desktop.png) · [English](docs/screenshots/dashboard-english.png) · [Dark](docs/screenshots/dashboard-dark.png) | [Arabic dashboard](docs/screenshots/dashboard-mobile.png) · [English dashboard](docs/screenshots/dashboard-english-mobile.png) · [English landing](docs/screenshots/landing-english-mobile.png) |
 
 Purchase simulator: [Arabic](docs/screenshots/simulator-arabic.png) · [English](docs/screenshots/simulator-english.png) · [Dark](docs/screenshots/simulator-dark.png) · [Phone](docs/screenshots/simulator-mobile.png). Run `node scripts/capture-simulator.mjs` against the local preview to reproduce these isolated-demo captures.
+
+The two-phase `capture-locales.mjs` workflow also writes these Hebrew and German captures:
+
+| Language | Landing | Dashboard | Simulator |
+| --- | --- | --- | --- |
+| עברית · RTL | [Desktop](docs/screenshots/landing-hebrew-desktop.png) · [Phone](docs/screenshots/landing-hebrew-mobile.png) | [Desktop](docs/screenshots/dashboard-hebrew.png) · [Phone](docs/screenshots/dashboard-hebrew-mobile.png) | [Desktop](docs/screenshots/simulator-hebrew.png) · [Phone](docs/screenshots/simulator-hebrew-mobile.png) |
+| Deutsch · LTR | [Desktop](docs/screenshots/landing-german-desktop.png) · [Phone](docs/screenshots/landing-german-mobile.png) | [Desktop](docs/screenshots/dashboard-german.png) · [Phone](docs/screenshots/dashboard-german-mobile.png) | [Desktop](docs/screenshots/simulator-german.png) · [Phone](docs/screenshots/simulator-german-mobile.png) |
 
 The GitHub Actions workflow runs lint, type checking, money/calendar tests, PGlite integration tests, a production build and Playwright workflows. A separate job runs the integration suite against PostgreSQL 17. Browser failures upload diagnostic artifacts for seven days.
 

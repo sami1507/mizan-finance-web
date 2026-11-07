@@ -1,6 +1,7 @@
 import { z } from "zod";
 
 export const currencySchema = z.enum(["ILS", "USD", "EUR"]);
+export const localeSchema = z.enum(["ar", "en", "he", "de"]);
 export const idSchema = z.string().min(1).max(200);
 export const amountSchema = z.number().int().positive().max(1_000_000_000_000);
 export const balanceSchema = z.number().int().min(-1_000_000_000_000).max(1_000_000_000_000);
@@ -17,7 +18,7 @@ export const budgetSchema = z.object({ categoryId: idSchema, month: monthSchema,
 export const goalSchema = z.object({ name: z.string().trim().min(1).max(100), target: amountSchema, currency: currencySchema, deadline: dateSchema });
 export const contributionSchema = z.object({ goalId: idSchema, accountId: idSchema, amount: amountSchema, date: dateSchema });
 export const recurringSchema = transactionSchema.omit({ date: true, note: true }).extend({ name: z.string().trim().min(1).max(100), frequency: z.enum(["monthly", "weekly", "yearly"]), nextDate: dateSchema, active: z.boolean().default(true) });
-export const profileSchema = z.object({ name: z.string().trim().min(1).max(100), locale: z.enum(["ar", "en"]), currency: currencySchema, timezone: timezoneSchema });
+export const profileSchema = z.object({ name: z.string().trim().min(1).max(100), locale: localeSchema, currency: currencySchema, timezone: timezoneSchema });
 export const onboardingSchema = profileSchema.extend({ accountName: z.string().trim().min(1).max(80), accountType: z.enum(["bank", "cash", "wallet"]), openingBalance: balanceSchema });
 export const noteSchema = z.object({ title: z.string().trim().min(1).max(120), body: z.string().trim().min(1).max(5000) });
 export class ServiceError extends Error { constructor(message: string, public status = 400) { super(message); } }

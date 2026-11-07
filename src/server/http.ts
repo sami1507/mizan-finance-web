@@ -5,7 +5,7 @@ import { getAuth } from "./auth";
 import { getDb } from "./db";
 import { demoSessions, user } from "./schema";
 import { ServiceError } from "./validation";
-import { bilingual, validationLabel } from "./messages";
+import { localizedMessage, requestLocale, validationLabel } from "./messages";
 
 export const DEMO_COOKIE = "mizan_demo";
 export const noStore = { "Cache-Control": "private, no-store, max-age=0" };
@@ -56,10 +56,12 @@ export async function readJson(request: Request, maximumBytes = 2_000_000): Prom
   } finally { reader.releaseLock(); }
   try { return JSON.parse(text); } catch { throw new ServiceError("Invalid JSON data."); }
 }
-export function errorResponse(error: unknown): Response {
-  if (error instanceof ServiceError) return Response.json({ error: bilingual(error.message) }, { status: error.status, headers: noStore });
-  if (error instanceof ZodError) return Response.json({ error: error.issues.slice(0, 5).map(issue => `${validationLabel(issue.path)}: قيمة غير صالحة / Invalid value`).join("; ") }, { status: 400, headers: noStore });
+export function errorResponse(error: unknown, request?: Request): Response {
+  const locale = requestLocale(request);
+  if (error instanceof ServiceError) return Response.json({ error: localizedMessage(error.message, locale) }, { status: error.status, headers: noStore });
+  const invalidValue = locale === "he" ? "ערך לא תקין" : locale === "de" ? "Ungültiger Wert" : "قيمة غير صالحة / Invalid value";
+  if (error instanceof ZodError) return Response.json({ error: error.issues.slice(0, 5).map(issue => `${validationLabel(issue.path, locale)}: ${invalidValue}`).join("; ") }, { status: 400, headers: noStore });
   // Never log raw query parameters, credentials, or financial payloads.
   console.error("Mizan request failed:", error instanceof Error ? error.name : "UnknownError");
-  return Response.json({ error: bilingual("The request could not be completed. Please try again.") }, { status: 500, headers: noStore });
+  return Response.json({ error: localizedMessage("The request could not be completed. Please try again.", locale) }, { status: 500, headers: noStore });
 }

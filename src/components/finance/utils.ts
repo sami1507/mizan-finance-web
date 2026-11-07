@@ -1,28 +1,36 @@
 import type { Currency, Locale, Snapshot, Transaction } from "@/lib/contracts";
 import { exactSum, localDate, parseMoney } from "@/lib/finance";
+import { localeTag, translate } from "@/lib/i18n";
 
 export const today = (timezone = "Asia/Jerusalem") => localDate(timezone);
 export const thisMonth = (timezone = "Asia/Jerusalem") => today(timezone).slice(0, 7);
-export function minor(value: string): number {
-  try { return parseMoney(value); }
+export function minor(value: string, locale: Locale = "ar"): number {
+  try {
+    // Accept an ungrouped German decimal comma; never guess thousands separators.
+    const trimmed = value.trim();
+    if (locale === "de" && /^-?\d+,\d{1,2}$/.test(trimmed)) return parseMoney(trimmed.replace(",", "."));
+    return parseMoney(value);
+  }
   catch (error) {
     throw new Error(error instanceof Error && error.message.includes("large")
-      ? "المبلغ أكبر من الحد المسموح. / Amount exceeds the supported limit."
-      : "أدخل مبلغًا صحيحًا بمنزلتين عشريتين كحد أقصى. / Enter an amount with up to two decimal places.");
+      ? translate(locale, "المبلغ أكبر من الحد المسموح.", "Amount exceeds the supported limit.")
+      : translate(locale, "أدخل مبلغًا صحيحًا بمنزلتين عشريتين كحد أقصى.", "Enter an amount with up to two decimal places."));
   }
 }
-export function major(value: number) { return (value / 100).toFixed(2); }
+export function major(value: number, locale: Locale = "en") { const amount = (value / 100).toFixed(2); return locale === "de" ? amount.replace(".", ",") : amount; }
 export function money(value: number, currency: Currency, locale: Locale) {
-  return new Intl.NumberFormat(locale === "ar" ? "ar-IL" : "en-IL", { style: "currency", currency, maximumFractionDigits: 2 }).format(value / 100);
+  return new Intl.NumberFormat(localeTag(locale), { style: "currency", currency, maximumFractionDigits: 2 }).format(value / 100);
 }
 export function dateLabel(value: string, locale: Locale, timezone = "Asia/Jerusalem") {
   // A ledger date is a calendar day, not an instant; do not shift it across time zones.
   const calendarDate = value.length === 10;
-  return new Intl.DateTimeFormat(locale === "ar" ? "ar" : "en", { day: "numeric", month: "short", timeZone: calendarDate ? "UTC" : timezone }).format(new Date(calendarDate ? `${value}T12:00:00Z` : value));
+  return new Intl.DateTimeFormat(localeTag(locale), { day: "numeric", month: "short", timeZone: calendarDate ? "UTC" : timezone }).format(new Date(calendarDate ? `${value}T12:00:00Z` : value));
 }
 export function categoryLabel(data: Snapshot, id: string, locale: Locale) {
   const category = data.categories.find((c) => c.id === id);
-  return category ? locale === "ar" ? category.nameAr : category.name : "—";
+  if (!category) return "—";
+  const builtins = new Set(["salary", "freelance", "other-income", "groceries", "dining", "transport", "housing", "shopping", "health", "subscriptions", "education", "other"]);
+  return builtins.has(category.id.split(":").at(-1)!) ? translate(locale, category.nameAr, category.name) : locale === "ar" ? category.nameAr : category.name;
 }
 export function sum(rows: Transaction[], kind: "income" | "expense") { return exactSum(rows.filter((r) => r.kind === kind).map((r) => r.amount)); }
 export function monthlyRows(data: Snapshot, currency: Currency, account = "", months = 6) {

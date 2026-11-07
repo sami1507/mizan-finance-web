@@ -1,11 +1,14 @@
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
+import { eq } from "drizzle-orm";
 import nodemailer from "nodemailer";
 import { randomBytes } from "node:crypto";
 import { readFile, mkdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { getDb } from "./db";
 import * as schema from "./schema";
+import { passwordResetEmail } from "./messages";
+import { localeSchema } from "./validation";
 
 async function authSecret(): Promise<string> {
   if (process.env.BETTER_AUTH_SECRET) {
@@ -34,8 +37,11 @@ async function createAuth() {
       revokeSessionsOnPasswordReset: true,
       sendResetPassword: async ({ user, url }) => {
         if (!process.env.SMTP_URL || !process.env.MAIL_FROM) throw new Error("Password recovery requires SMTP_URL and MAIL_FROM.");
+        const [profile] = await db.select({ locale: schema.profiles.locale }).from(schema.profiles).where(eq(schema.profiles.userId, user.id));
+        const preference = localeSchema.safeParse(profile?.locale);
+        const message = passwordResetEmail(preference.success ? preference.data : undefined, url);
         const transport = nodemailer.createTransport(process.env.SMTP_URL);
-        await transport.sendMail({ from: process.env.MAIL_FROM, to: user.email, subject: "Mizan | Reset your password — إعادة تعيين كلمة المرور", text: `Reset your Mizan Finance password / إعادة تعيين كلمة مرور ميزان:\n\n${url}\n\nIf you did not request this, ignore this message.\nإن لم تطلب ذلك، تجاهل هذه الرسالة.` });
+        await transport.sendMail({ from: process.env.MAIL_FROM, to: user.email, ...message });
       },
     },
     session: { expiresIn: 60 * 60 * 24 * 7, updateAge: 60 * 60 * 24, cookieCache: { enabled: false } },

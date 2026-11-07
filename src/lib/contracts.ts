@@ -1,5 +1,5 @@
 export type Currency = "ILS" | "USD" | "EUR";
-export type Locale = "ar" | "en";
+export type Locale = "ar" | "en" | "he" | "de";
 export interface Profile { id: string; name: string; email: string; locale: Locale; currency: Currency; timezone: string; onboarded: boolean; }
 export interface Account { id: string; name: string; type: "bank" | "cash" | "wallet"; currency: Currency; openingBalance: number; balance: number; }
 export interface Category { id: string; name: string; nameAr: string; kind: "income" | "expense"; color: string; }

@@ -564,7 +564,7 @@
 .onboarding-story li svg { color: #c4ad76; }
 .onboarding-story > small { color: #aebdc5; font-size: 12px; }
 .onboarding-content { display: flex; flex-direction: column; align-items: stretch; padding: 30px 55px; }
-.onboarding-content > .language-toggle { align-self: flex-end; }
+.onboarding-content > :is(.language-toggle,.language-select) { align-self: flex-end; }
 .onboarding-form-wrap { width: 100%; max-width: 480px; margin: auto; padding: 35px 0; }
 .onboarding-step { display: block; margin-bottom: 24px; color: var(--muted); font: 500 13px "DM Sans Variable", sans-serif; letter-spacing: 2px; }
 .onboarding-icon { display: grid; place-items: center; width: 48px; height: 48px; margin-bottom: 22px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); color: var(--green); }

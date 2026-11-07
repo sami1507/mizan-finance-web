@@ -2,7 +2,9 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowUpLeft, ArrowUpRight, Plus, Play, Globe2, Moon, Sun, Wallet, Target, Layers3, ChartNoAxesCombined, Check } from "lucide-react";
+import { ArrowUpLeft, ArrowUpRight, Plus, Play, Moon, Sun, Wallet, Target, Layers3, ChartNoAxesCombined, Check } from "lucide-react";
+import { LanguageSelect } from "./language-select";
+import { isRtl } from "@/lib/i18n";
 import { Brand } from "./brand";
 import { usePreferences } from "./providers";
 
@@ -25,8 +27,8 @@ const questions = [
 ];
 
 export function Landing() {
-  const { t, locale, setLocale, theme, setTheme } = usePreferences();
-  const Arrow = locale === "ar" ? ArrowUpLeft : ArrowUpRight;
+  const { t, locale, theme, setTheme } = usePreferences();
+  const Arrow = isRtl(locale) ? ArrowUpLeft : ArrowUpRight;
   return (
     <div className="landing">
       <a href="#content" className="skip-link">{t("تخطي إلى المحتوى", "Skip to content")}</a>
@@ -38,7 +40,7 @@ export function Landing() {
           <a href="#faq">{t("أسئلة شائعة", "FAQ")}</a>
         </nav>
         <div className="site-actions">
-          <button className="icon-button" aria-label={t("Switch to English", "التبديل إلى العربية")} onClick={() => setLocale(locale === "ar" ? "en" : "ar")}><Globe2 size={18}/><span>{locale === "ar" ? "English" : "العربية"}</span></button>
+          <LanguageSelect compact/>
           <button className="icon-button" aria-label={t("تغيير المظهر", "Toggle theme")} onClick={() => setTheme(theme === "light" ? "dark" : "light")}>{theme === "light" ? <Moon size={18}/> : <Sun size={18}/>}</button>
           <Link className="login-link" href="/login">{t("تسجيل الدخول", "Sign in")}</Link>
           <Link className="btn btn-primary small" href="/register">{t("ابدأ الآن", "Get started")}<Arrow size={16}/></Link>
@@ -56,7 +58,7 @@ export function Landing() {
               <Link className="btn btn-secondary" href="/demo"><Play size={16}/>{t("جرّب المنصة", "Explore the demo")}</Link>
             </div>
             <div className="hero-assurance">
-              <span><Check size={15}/>{t("بالعربية والإنجليزية", "Arabic & English")}</span>
+              <span><Check size={15}/>{t("العربية والإنجليزية والعبرية والألمانية", "Arabic, English, Hebrew & German")}</span>
               <span><Check size={15}/>{t("يمكنك تصدير بياناتك", "Export your data")}</span>
               <span><Check size={15}/>{t("حسابات يدوية", "Manual accounts")}</span>
             </div>

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "@fontsource-variable/noto-sans-arabic";
+import "@fontsource-variable/noto-sans-hebrew";
 import "@fontsource-variable/dm-sans";
 import "./globals.css";
 import { Providers } from "@/components/providers";

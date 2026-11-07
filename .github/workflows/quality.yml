@@ -72,4 +72,4 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
-      - run: npm test -- tests/finance.integration.test.ts tests/simulator.integration.test.ts
+      - run: npm test -- tests/finance.integration.test.ts tests/simulator.integration.test.ts tests/locales.integration.test.ts

@@ -30,5 +30,5 @@ export async function GET(request: Request) {
       rows.push([transaction.date, transaction.kind, amount, transaction.currency, data.accounts.find(account => account.id === transaction.accountId)?.name, data.categories.find(category => category.id === transaction.categoryId)?.name, transaction.note, transaction.accountId, transaction.categoryId]);
     }
     return new Response(`\uFEFF${rows.map(row => row.map(csvCell).join(",")).join("\r\n")}`, { headers: { ...noStore, "Content-Type": "text/csv; charset=utf-8", "Content-Disposition": 'attachment; filename="mizan-transactions.csv"' } });
-  } catch (error) { return errorResponse(error); }
+  } catch (error) { return errorResponse(error, request); }
 }

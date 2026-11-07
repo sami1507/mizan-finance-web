@@ -8,7 +8,7 @@ test("a new user registers, completes onboarding, records money and signs in aga
   const email = `browser-${randomUUID()}@example.test`;
   const password = `Browser-${randomUUID()}-A1!`;
   await page.goto("/register");
-  await page.getByRole("button", { name: "English", exact: true }).click();
+  await page.getByTestId("language-select").first().selectOption("en");
   await page.locator('input[name="name"]').fill("Browser account");
   await page.locator('input[name="email"]').fill(email);
   await page.locator('input[name="password"]').fill(password);
@@ -61,7 +61,7 @@ test("demo UI creates an expense, budget and goal, persists changes, and exports
   const runtimeErrors: string[] = [];
   page.on("pageerror", error => runtimeErrors.push(error.message));
   await page.goto("/");
-  await page.getByRole("button", { name: "Switch to English", exact: true }).click();
+  await page.getByTestId("language-select").first().selectOption("en");
   await expect(page.getByRole("heading", { level: 1 })).toContainText("Know where you stand.");
   await page.getByRole("link", { name: "Explore the demo", exact: true }).click();
   await expect(page.getByTestId("add-transaction")).toBeVisible({ timeout: 60_000 });
@@ -139,7 +139,7 @@ test("Arabic/English, dark mode, keyboard dialog and mobile/tablet layouts", asy
     expect(widths.document).toBeLessThanOrEqual(widths.viewport + 1);
     await page.screenshot({ path: testInfo.outputPath(`dashboard-ar-${viewport.width}.png`), fullPage: true });
   }
-  await page.getByTestId("language-toggle").click();
+  await page.getByTestId("language-select").first().selectOption("en");
   await expect(page.locator(".finance-app")).toHaveAttribute("dir", "ltr");
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.getByTestId("add-transaction").click();
@@ -168,7 +168,7 @@ test("landing is usable on desktop and mobile and unknown routes show a recovery
 test("CSV mapping previews and validates rows before saving and skips repeat imports", async ({ page }) => {
   await page.goto("/demo");
   await expect(page.getByTestId("add-transaction")).toBeVisible({ timeout: 60_000 });
-  await page.getByTestId("language-toggle").click();
+  await page.getByTestId("language-select").first().selectOption("en");
   await page.getByTestId("nav-transactions").click();
   await page.setViewportSize({ width: 390, height: 844 });
   // The accessible Actions heading must stay inside the horizontally scrolling table.

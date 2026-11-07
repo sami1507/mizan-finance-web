@@ -146,7 +146,7 @@ test("simulator supports keyboard, Arabic/English, dark mode and responsive char
   await page.getByTestId("simulator-purchase-amount").fill("100");
   await expect(page.getByTestId("simulator-result")).toBeVisible();
   for (const locale of ["en", "ar"] as const) {
-    if (locale === "ar") await page.getByTestId("language-toggle").click();
+    await page.getByTestId("language-select").first().selectOption(locale);
     await expect(page.locator("html")).toHaveAttribute("dir", locale === "ar" ? "rtl" : "ltr");
     for (const theme of ["light", "dark"] as const) {
       if ((await page.locator("html").getAttribute("data-theme")) !== theme) await page.getByTestId("theme-toggle").click();
