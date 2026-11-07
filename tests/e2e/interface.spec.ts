@@ -62,7 +62,7 @@ test("demo UI creates an expense, budget and goal, persists changes, and exports
   page.on("pageerror", error => runtimeErrors.push(error.message));
   await page.goto("/");
   await page.getByRole("button", { name: "Switch to English", exact: true }).click();
-  await expect(page.getByRole("heading", { level: 1 })).toContainText("Money made clear.");
+  await expect(page.getByRole("heading", { level: 1 })).toContainText("Know where you stand.");
   await page.getByRole("link", { name: "Explore the demo", exact: true }).click();
   await expect(page.getByTestId("add-transaction")).toBeVisible({ timeout: 60_000 });
   await expect(page.locator(".finance-app")).toHaveAttribute("dir", "ltr");
@@ -170,6 +170,9 @@ test("CSV mapping previews and validates rows before saving and skips repeat imp
   await expect(page.getByTestId("add-transaction")).toBeVisible({ timeout: 60_000 });
   await page.getByTestId("language-toggle").click();
   await page.getByTestId("nav-transactions").click();
+  await page.setViewportSize({ width: 390, height: 844 });
+  // The accessible Actions heading must stay inside the horizontally scrolling table.
+  expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(390);
   const before = await (await page.request.get("/api/finance")).json() as Snapshot;
   const row = `${new Date().toISOString().slice(0, 10)},27.35,CSV browser verification`;
   const file = { name: "sample.csv", mimeType: "text/csv", buffer: Buffer.from(`date,amount,note\n${row}\n${row}\n`) };

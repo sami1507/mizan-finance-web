@@ -4,6 +4,8 @@ A bilingual personal finance application built with Next.js, TypeScript, Tailwin
 
 Use the **English / العربية** button in the page header to switch languages. The preference persists across navigation and reloads; a new browser uses your saved account language after signing in. Select English before opening the demo to create English sample accounts, goals and notes. User-entered financial content is never automatically translated.
 
+The visual system uses warm ivory surfaces, navy structure and emerald actions. Arabic uses locally bundled Noto Sans Arabic; English uses DM Sans. Financial figures use tabular numerals, primary buttons and form fields use a consistent 44px minimum control height, and light/dark themes share explicit color and focus tokens.
+
 Financial records are persisted on the server. `localStorage` is used only for presentation preferences. This application does not connect to banks, execute payments or provide investment advice.
 
 ## Run locally

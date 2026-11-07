@@ -16,7 +16,7 @@ export function Providers({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const locale = useSyncExternalStore(subscribe, getStoredLocale, () => "ar") as Locale;
   const theme = useSyncExternalStore(subscribe, () => getPreference("mizan-theme", "light") === "dark" ? "dark" : "light", () => "light") as Theme;
-  useEffect(() => { document.documentElement.lang = locale; document.documentElement.dir = locale === "ar" ? "rtl" : "ltr"; document.documentElement.dataset.theme = theme; document.title = locale === "ar" ? "Mizan Finance | ميزان — أموالك، في توازن" : "Mizan Finance — Money made clear. Life in balance."; }, [locale, theme, pathname]);
+  useEffect(() => { document.documentElement.lang = locale; document.documentElement.dir = locale === "ar" ? "rtl" : "ltr"; document.documentElement.dataset.theme = theme; document.title = locale === "ar" ? "ميزان | Mizan Finance" : "Mizan Finance — Personal finance"; }, [locale, theme, pathname]);
   return <Context.Provider value={{ locale, theme, setLocale, setTheme, t: (ar, en) => locale === "ar" ? ar : en }}>{children}</Context.Provider>;
 }
 export function usePreferences() { const value = useContext(Context); if (!value) throw new Error("Preferences provider missing"); return value; }
