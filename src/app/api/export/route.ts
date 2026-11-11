@@ -1,12 +1,13 @@
 import { identity, errorResponse, noStore } from "@/server/http";
 import { getSnapshot } from "@/server/finance-service";
 import { ServiceError, dateSchema, currencySchema } from "@/server/validation";
+import { CSV_NOTE_ENCODING, needsSpreadsheetEscape } from "@/lib/csv-mapping";
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 function csvCell(value: unknown) {
   let text = String(value ?? "");
-  if (/^[\s]*[=+\-@\t\r]/.test(text)) text = `'${text}`;
+  if (needsSpreadsheetEscape(text)) text = `'${text}`;
   return `"${text.replaceAll('"', '""')}"`;
 }
 export async function GET(request: Request) {
@@ -23,11 +24,11 @@ export async function GET(request: Request) {
     const accountId = params.get("accountId");
     if (accountId && !data.accounts.some(account => account.id === accountId)) throw new ServiceError("Account not found.", 404);
     if (from && to && from > to) throw new ServiceError("The start date must precede the end date.");
-    const rows: unknown[][] = [["date", "kind", "amount", "currency", "account", "category", "note", "accountId", "categoryId"]];
+    const rows: unknown[][] = [["date", "kind", "amount", "currency", "account", "category", "note", "accountId", "categoryId", "noteEncoding"]];
     for (const transaction of data.transactions) {
       if ((from && transaction.date < from) || (to && transaction.date > to) || (currency && transaction.currency !== currency) || (accountId && transaction.accountId !== accountId)) continue;
       const amount = `${Math.floor(transaction.amount / 100)}.${String(transaction.amount % 100).padStart(2, "0")}`;
-      rows.push([transaction.date, transaction.kind, amount, transaction.currency, data.accounts.find(account => account.id === transaction.accountId)?.name, data.categories.find(category => category.id === transaction.categoryId)?.name, transaction.note, transaction.accountId, transaction.categoryId]);
+      rows.push([transaction.date, transaction.kind, amount, transaction.currency, data.accounts.find(account => account.id === transaction.accountId)?.name, data.categories.find(category => category.id === transaction.categoryId)?.name, transaction.note, transaction.accountId, transaction.categoryId, needsSpreadsheetEscape(transaction.note) ? CSV_NOTE_ENCODING : ""]);
     }
     return new Response(`\uFEFF${rows.map(row => row.map(csvCell).join(",")).join("\r\n")}`, { headers: { ...noStore, "Content-Type": "text/csv; charset=utf-8", "Content-Disposition": 'attachment; filename="mizan-transactions.csv"' } });
   } catch (error) { return errorResponse(error, request); }

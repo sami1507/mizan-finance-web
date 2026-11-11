@@ -1,0 +1,56 @@
+{
+  "recorded": "2026-11-11",
+  "sources": [
+    {
+      "name": "DM Sans Variable",
+      "package": "@fontsource-variable/dm-sans",
+      "version": "5.3.0",
+      "source": "https://github.com/googlefonts/dm-fonts",
+      "distribution": "https://fontsource.org/fonts/dm-sans",
+      "license": "OFL-1.1",
+      "notice": "DM-Sans-OFL.txt",
+      "use": "Self-hosted Latin and Latin-extended interface font"
+    },
+    {
+      "name": "Noto Sans Arabic Variable",
+      "package": "@fontsource-variable/noto-sans-arabic",
+      "version": "5.3.0",
+      "source": "https://github.com/notofonts/arabic",
+      "distribution": "https://fontsource.org/fonts/noto-sans-arabic",
+      "license": "OFL-1.1",
+      "notice": "Noto-Sans-Arabic-OFL.txt",
+      "use": "Self-hosted Arabic interface font"
+    },
+    {
+      "name": "Noto Sans Hebrew Variable",
+      "package": "@fontsource-variable/noto-sans-hebrew",
+      "version": "5.3.0",
+      "source": "https://github.com/notofonts/hebrew",
+      "distribution": "https://fontsource.org/fonts/noto-sans-hebrew",
+      "license": "OFL-1.1",
+      "notice": "Noto-Sans-Hebrew-OFL.txt",
+      "use": "Self-hosted Hebrew interface font and shekel glyph"
+    },
+    {
+      "name": "Lucide React",
+      "package": "lucide-react",
+      "version": "1.69.0",
+      "source": "https://github.com/lucide-icons/lucide",
+      "license": "ISC",
+      "notice": "Lucide-ISC.txt",
+      "use": "Interface icons"
+    },
+    {
+      "name": "Mizan brand artwork",
+      "source": "scripts/generate-brand.mjs and src/components/brand.tsx in this repository",
+      "license": "No third-party font or bitmap embedded; project-authored SVG geometry. No separate public license or trademark registration is asserted.",
+      "use": "Logo, mark, application icons, social image"
+    },
+    {
+      "name": "Product preview and delivery screenshots",
+      "source": "Running Mizan application; scripts/capture*.mjs",
+      "license": "Project-generated captures, isolated synthetic demo data only",
+      "use": "Landing page preview and delivery evidence"
+    }
+  ]
+}

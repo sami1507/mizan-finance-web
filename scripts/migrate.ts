@@ -1,3 +1,4 @@
+import { ConfigurationError } from "../src/server/config";
 import "dotenv/config";
 import { getDb, closeDb } from "../src/server/db";
 async function main() {
@@ -5,4 +6,4 @@ async function main() {
   console.log("Database migrations applied successfully.");
   await closeDb();
 }
-main().catch(error => { console.error(error instanceof Error ? error.message : "Migration failed"); process.exitCode = 1; });
+main().catch(async error => { console.error(error instanceof ConfigurationError ? error.message : "Migration failed. Check configuration and database availability; no sensitive error details were logged."); await closeDb().catch(() => {}); process.exitCode = 1; });

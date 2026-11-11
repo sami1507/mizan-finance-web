@@ -1,20 +1,18 @@
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { eq } from "drizzle-orm";
-import nodemailer from "nodemailer";
 import { randomBytes } from "node:crypto";
 import { readFile, mkdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { getDb } from "./db";
 import * as schema from "./schema";
-import { passwordResetEmail } from "./messages";
 import { localeSchema } from "./validation";
+import { authenticationConfig } from "./config";
+import { MailDeliveryError, markMailDeliveryFailed, sendPasswordResetEmail } from "./email";
 
 async function authSecret(): Promise<string> {
-  if (process.env.BETTER_AUTH_SECRET) {
-    if (process.env.BETTER_AUTH_SECRET.length < 32) throw new Error("BETTER_AUTH_SECRET must contain at least 32 characters.");
-    return process.env.BETTER_AUTH_SECRET;
-  }
+  const { secret } = authenticationConfig();
+  if (secret) return secret;
   if (process.env.NODE_ENV === "production") throw new Error("BETTER_AUTH_SECRET is required in production.");
   const directory = path.join(process.cwd(), "data");
   const secretFile = path.join(directory, ".auth-secret");
@@ -27,8 +25,8 @@ async function authSecret(): Promise<string> {
 }
 
 async function createAuth() {
+  const { baseURL } = authenticationConfig();
   const db = await getDb();
-  const baseURL = process.env.BETTER_AUTH_URL || "http://localhost:3000";
   return betterAuth({
     appName: "Mizan Finance", baseURL, secret: await authSecret(),
     database: drizzleAdapter(db, { provider: "pg", schema: { user: schema.user, session: schema.session, account: schema.account, verification: schema.verification } }),
@@ -36,18 +34,22 @@ async function createAuth() {
       enabled: true, minPasswordLength: 10, maxPasswordLength: 128,
       revokeSessionsOnPasswordReset: true,
       sendResetPassword: async ({ user, url }) => {
-        if (!process.env.SMTP_URL || !process.env.MAIL_FROM) throw new Error("Password recovery requires SMTP_URL and MAIL_FROM.");
-        const [profile] = await db.select({ locale: schema.profiles.locale }).from(schema.profiles).where(eq(schema.profiles.userId, user.id));
-        const preference = localeSchema.safeParse(profile?.locale);
-        const message = passwordResetEmail(preference.success ? preference.data : undefined, url);
-        const transport = nodemailer.createTransport(process.env.SMTP_URL);
-        await transport.sendMail({ from: process.env.MAIL_FROM, to: user.email, ...message });
+        try {
+          const [profile] = await db.select({ locale: schema.profiles.locale }).from(schema.profiles).where(eq(schema.profiles.userId, user.id));
+          const preference = localeSchema.safeParse(profile?.locale);
+          await sendPasswordResetEmail(user.email, url, preference.success ? preference.data : undefined);
+        } catch {
+          markMailDeliveryFailed();
+          throw new MailDeliveryError();
+        }
       },
     },
     session: { expiresIn: 60 * 60 * 24 * 7, updateAge: 60 * 60 * 24, cookieCache: { enabled: false } },
     rateLimit: { enabled: true, window: 60, max: 60, customRules: { "/sign-in/email": { window: 60, max: 8 }, "/sign-up/email": { window: 60, max: 5 }, "/request-password-reset": { window: 60, max: 3 } } },
     advanced: { cookiePrefix: "mizan", useSecureCookies: baseURL.startsWith("https://") },
     trustedOrigins: [baseURL],
+    // Better Auth's raw log arguments may contain SQL parameters or personal data.
+    logger: { level: "warn", log(level) { console.error(`Mizan authentication event: ${level}. Inspect configuration and service health.`); } },
   });
 }
 const globalAuth = globalThis as unknown as { mizanAuth?: ReturnType<typeof createAuth> };

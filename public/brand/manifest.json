@@ -1,0 +1,122 @@
+{
+  "version": 1,
+  "artwork": "Original geometric Mizan m-dot mark and outlined lettering authored for this project; no external bitmap or font embedded in logo SVGs.",
+  "colors": {
+    "navy": "#172d38",
+    "ivory": "#f7f5f0",
+    "emerald": "#087f60",
+    "gold": "#ac8b4d",
+    "lightGold": "#d5bc80",
+    "white": "#ffffff"
+  },
+  "assets": [
+    {
+      "name": "mark-on-light",
+      "svg": "mark-on-light.svg",
+      "png": "mark-on-light.png",
+      "viewBox": [
+        64,
+        64
+      ],
+      "pngWidth": 512,
+      "transparent": true,
+      "description": "Mizan Finance symbol — on-light"
+    },
+    {
+      "name": "logo-on-light",
+      "svg": "logo-on-light.svg",
+      "png": "logo-on-light.png",
+      "viewBox": [
+        348,
+        104
+      ],
+      "pngWidth": 1044,
+      "transparent": true,
+      "description": "Mizan Finance — on-light"
+    },
+    {
+      "name": "mark-on-dark",
+      "svg": "mark-on-dark.svg",
+      "png": "mark-on-dark.png",
+      "viewBox": [
+        64,
+        64
+      ],
+      "pngWidth": 512,
+      "transparent": true,
+      "description": "Mizan Finance symbol — on-dark"
+    },
+    {
+      "name": "logo-on-dark",
+      "svg": "logo-on-dark.svg",
+      "png": "logo-on-dark.png",
+      "viewBox": [
+        348,
+        104
+      ],
+      "pngWidth": 1044,
+      "transparent": true,
+      "description": "Mizan Finance — on-dark"
+    },
+    {
+      "name": "mark-black",
+      "svg": "mark-black.svg",
+      "png": "mark-black.png",
+      "viewBox": [
+        64,
+        64
+      ],
+      "pngWidth": 512,
+      "transparent": true,
+      "description": "Mizan Finance symbol — black"
+    },
+    {
+      "name": "logo-black",
+      "svg": "logo-black.svg",
+      "png": "logo-black.png",
+      "viewBox": [
+        348,
+        104
+      ],
+      "pngWidth": 1044,
+      "transparent": true,
+      "description": "Mizan Finance — black"
+    },
+    {
+      "name": "mark-white",
+      "svg": "mark-white.svg",
+      "png": "mark-white.png",
+      "viewBox": [
+        64,
+        64
+      ],
+      "pngWidth": 512,
+      "transparent": true,
+      "description": "Mizan Finance symbol — white"
+    },
+    {
+      "name": "logo-white",
+      "svg": "logo-white.svg",
+      "png": "logo-white.png",
+      "viewBox": [
+        348,
+        104
+      ],
+      "pngWidth": 1044,
+      "transparent": true,
+      "description": "Mizan Finance — white"
+    }
+  ],
+  "appIcons": [
+    "app-icon.svg",
+    "app-icon-192.png",
+    "app-icon-512.png"
+  ],
+  "social": {
+    "svg": "social-share.svg",
+    "png": "social-share.png",
+    "width": 1200,
+    "height": 630,
+    "transparent": false
+  }
+}

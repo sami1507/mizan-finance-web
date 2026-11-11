@@ -1,6 +1,8 @@
 import type { Locale } from "../lib/contracts";
 
 const arabic: Record<string, string> = {
+  "This request was already used for different changes.": "استُخدم هذا الطلب لتغييرات مختلفة. أعد فتح النموذج وحاول مجددًا.",
+  "The signed-in account changed. Reload the page before making changes.": "تغيّر الحساب المسجّل. أعد تحميل الصفحة قبل إجراء تغييرات.",
   "Please sign in to continue.": "سجّل الدخول للمتابعة.",
   "Session expired. Please sign in again.": "انتهت الجلسة؛ سجّل الدخول مجددًا.",
   "Session expired.": "انتهت الجلسة؛ سجّل الدخول مجددًا.",
@@ -54,6 +56,8 @@ const translated: Record<"he" | "de", Record<string, string>> = {
     "Please sign in to continue.": "יש להתחבר כדי להמשיך.",
     "Session expired. Please sign in again.": "תוקף ההתחברות פג. יש להתחבר מחדש.",
     "Session expired.": "תוקף ההתחברות פג. יש להתחבר מחדש.",
+    "This request was already used for different changes.": "בקשה זו כבר שימשה לשינויים אחרים. יש לפתוח מחדש את הטופס.",
+    "The signed-in account changed. Reload the page before making changes.": "החשבון המחובר השתנה. יש לטעון מחדש את הדף לפני ביצוע שינויים.",
     "This request origin is not allowed.": "לא ניתן לאמת את מקור הבקשה. יש לפתוח את האתר מחדש ולנסות שוב.",
     "Send JSON data.": "פורמט הבקשה אינו תקין. יש לנסות שוב דרך האתר.",
     "Invalid JSON data.": "לא ניתן לקרוא את נתוני הבקשה. יש לנסות שוב.",
@@ -97,6 +101,8 @@ const translated: Record<"he" | "de", Record<string, string>> = {
     "Please sign in to continue.": "Bitte melde dich an, um fortzufahren.",
     "Session expired. Please sign in again.": "Deine Sitzung ist abgelaufen. Bitte melde dich erneut an.",
     "Session expired.": "Deine Sitzung ist abgelaufen. Bitte melde dich erneut an.",
+    "This request was already used for different changes.": "Diese Anfrage wurde bereits für andere Änderungen verwendet. Öffne das Formular erneut.",
+    "The signed-in account changed. Reload the page before making changes.": "Das angemeldete Konto hat sich geändert. Lade die Seite vor weiteren Änderungen neu.",
     "This request origin is not allowed.": "Der Ursprung der Anfrage konnte nicht bestätigt werden. Öffne die Website erneut und versuche es noch einmal.",
     "Send JSON data.": "Das Anfrageformat ist ungültig. Bitte versuche es erneut über die Website.",
     "Invalid JSON data.": "Die Anfragedaten konnten nicht gelesen werden. Bitte versuche es erneut.",

@@ -2,6 +2,8 @@
 
 A four-language personal finance application built with Next.js, TypeScript, Tailwind CSS, Drizzle ORM and Better Auth. Arabic is the default; Arabic and Hebrew use RTL, while English and German use LTR. All four languages support light/dark themes and ILS/USD/EUR.
 
+Start with this README, then [service configuration](docs/API_SETUP.md), [operations, backups and recovery](docs/OPERATIONS.md), [brand assets and design tokens](docs/BRAND.md), and [delivery evidence](docs/DELIVERY_REPORT.md). [PROJECT_STATE.md](PROJECT_STATE.md) records the acceptance map and remaining provider checks. The source is prepared for configuration and live verification; no public deployment or real provider inbox has been verified on the owner's behalf.
+
 Use the native **Language** selector in the page header or profile settings to choose **العربية**, **English**, **עברית** or **Deutsch**. The presentation preference persists across navigation and reloads. Save your profile settings to retain the account language on the server; a browser without a local language preference restores it after sign-in. Select a language before opening a new demo to create sample accounts, goals and notes in that language. Existing user-entered names, descriptions, notes and financial content are preserved and never automatically translated.
 
 The visual system uses warm ivory surfaces, navy structure and emerald actions. Fonts are locally bundled: Noto Sans Arabic for Arabic, Noto Sans Hebrew for Hebrew, and DM Sans for English and German. Financial figures use tabular numerals, primary buttons and form fields use a consistent 44px minimum control height, and light/dark themes share explicit color and focus tokens.
@@ -36,6 +38,7 @@ Requirements: Node.js 22.12 or newer (Node.js 24 is used in CI), npm, and a mode
 
 ```sh
 npm ci
+npm run check:config
 npm run db:migrate
 npm run dev
 ```
@@ -59,6 +62,11 @@ Copy `.env.example` to `.env` when configuring external services; both Next.js a
 | `npm run test:e2e` | Playwright API and browser workflows |
 | `npm run db:migrate` | Apply checked-in SQL migrations |
 | `npm run db:seed` | Create a dedicated sample-data workspace |
+| `npm run check:config` | Validate settings without printing values; optional `--production`, `--database`, `--smtp` checks |
+| `npm run check:persistence` | Production stop/start check with an isolated local database and demo |
+| `npm run demo:cleanup` | Remove expired demo data from the configured database |
+| `npm run brand:generate` | Regenerate the ready-to-use SVG/PNG identity files |
+| `npm run review:delivery` | Local demo-only browser, accessibility, layout and screenshot review |
 
 For browser tests, install the browser once:
 
@@ -103,6 +111,7 @@ erDiagram
   FINANCIAL_ACCOUNT ||--o{ CONTRIBUTION : earmarked_from
   FINANCIAL_ACCOUNT ||--o{ RECURRING : schedules
   USER ||--o{ NOTE : writes
+  USER ||--o{ MUTATION_REQUEST : deduplicates_retries
 ```
 
 - Amounts are integer minor units in the database and API: `12345` means `123.45`. Decimal text is parsed without multiplying floating point values. Arithmetic checks the safe-integer range.
@@ -113,6 +122,8 @@ erDiagram
 - A budget is scoped to an owner, month, category and currency; its spent amount is derived from matching expenses.
 - Recurring definitions are schedules. Processing due items creates actual ledger entries and advances their next dates. A unique occurrence key prevents processing the same occurrence twice. Monthly/yearly dates clamp to the last valid day of the target month.
 - CSV import validates mapped rows before committing them. Explicit account/category IDs take precedence over names; ambiguous names require correction before saving. Duplicate fingerprints are owner-scoped; repeated rows and repeat imports are skipped. An invalid batch is not partially saved.
+- Browser writes carry an owner-scoped retry ID. The database records its payload hash in the same transaction as the operation; a lost response can be retried without repeating the effect, including after an intervening session error. Keep the form unchanged when retrying. IDs stay in temporary memory until a response is confirmed; after closing/reloading a failed form, inspect the ledger before entering the operation again. The `X-Mizan-Workspace` check also prevents a stale tab writing into a different account after sign-in changes.
+- CSV exports protect spreadsheet formula-like text. An explicit per-row `noteEncoding` marker preserves the original note on reimport without treating an ordinary apostrophe in external files as an escape. Keep this column when round-tripping a Mizan export.
 
 ## Architecture
 
@@ -154,6 +165,7 @@ At minimum, configure:
 
 ```sh
 npm ci
+npm run check:config -- --production --database
 npm run db:migrate
 npm run build
 npm start
@@ -161,15 +173,21 @@ npm start
 
 The application also applies pending migrations when it opens the database. PostgreSQL migration execution uses an advisory lock so application processes do not apply the same migration simultaneously. Deploy the `drizzle` directory with the application. For a single-process local production preview only, `ALLOW_LOCAL_DB=true` permits PGlite with `npm start`; do not use this mode for multi-instance or serverless production.
 
-No deployment provider or email account is provisioned automatically. Password-reset delivery requires `SMTP_URL` and `MAIL_FROM`. The subject and message template follow the saved profile language; translated templates do not constitute an email-service integration. Without SMTP configuration, the interface reports that recovery is unavailable rather than claiming to have sent mail.
+No deployment provider or email account is provisioned automatically. Password-reset delivery requires `SMTP_URL` and `MAIL_FROM`. The subject and message template follow the saved profile language. The SMTP integration is implemented, but real sender authorization and inbox arrival require your provider configuration and live check. Without SMTP configuration, the interface reports that recovery is unavailable rather than claiming to have sent mail.
+
+The SMTP adapter enforces remote TLS, finite connection/command timeouts and recipient acceptance. Delivery failures return an unavailable response; messages are not automatically retried. `npm run check:config -- --smtp` checks connection/authentication without sending mail. Actual sender authorization and inbox arrival require the [documented owner-controlled live check](docs/API_SETUP.md). Local protocol tests exercise a real SMTP connection and password reset flow, but are not evidence of a production mail account.
+
+`GET /api/health` checks liveness. `GET /api/health?check=ready` returns only `ready`/`unavailable` after checking the database and core configuration. Its five-second deadline bounds asynchronous waits; first-time synchronous PGlite file creation can delay the local event loop, so run `db:migrate` before the first local start. It does not certify SMTP, backups or hosted infrastructure. Set `BETTER_AUTH_URL` before building public metadata; changing it requires rebuilding. Authentication/private workspace routes are marked `noindex` independently of session authorization.
 
 ## Quality checks
 
-Verified locally on 8 November 2026: lint, TypeScript, the production build, **187 unit/database tests and 18 production-server browser tests passed**. The savings calculator adds 53 exact calculation and ledger-selection cases plus 3 browser workflows: manual item editing, shortfalls and zero income, replacement from actual monthly records, currency isolation, temporary inputs without ledger/storage writes, and keyboard navigation. All four languages and both themes were checked at 320/390/768/1440px. Existing authentication, financial integrity, imports, localization and purchase-simulator flows also passed. Actual calculator screenshots were visually reviewed with isolated demo data. Browser tests use their own server/database and respect the production signup rate limit. See the repository Actions tab for the result against each pushed commit.
+Verified on 11–12 November 2026 from a fresh `npm ci`: lint, TypeScript, **264 unit/database/integration tests in 17 files**, and the production build passed. A real stop/start test preserved the session, exact balance, ledger and retry identity. The production browser suite also passed; final accessibility and CI results are recorded in [DELIVERY_REPORT](docs/DELIVERY_REPORT.md), together with the scope and limits of the checks. `npm audit --audit-level=high` reported **zero known vulnerabilities** at the time of verification.
+
+The checks exercise real registration/onboarding, four languages, both themes, exact financial calculations, owner isolation, failed network writes, expired sessions, CSV round trips, recurring duplicate prevention, purchase scenarios and monthly savings. SMTP tests use an actual local protocol peer and the Better Auth recovery handler; they do not send real mail. Hosted PostgreSQL, HTTPS ingress, real sender delivery and provider backup restoration still require the owner's live checks.
 
 ### Screenshots
 
-These are captures of the running application with isolated sample data, not design mockups.
+These are captures of the running application with isolated sample data, not design mockups. The final delivery captures are [Arabic landing](docs/screenshots/delivery-landing-ar-1440-light.png), [English dark dashboard](docs/screenshots/delivery-dashboard-en-1440-dark.png), [Hebrew phone](docs/screenshots/delivery-dashboard-he-390-light.png), and [German phone savings](docs/screenshots/delivery-savings-de-320-dark.png); the earlier feature captures below show the independently tested calculators.
 
 | Landing | Dashboard | Phone |
 | --- | --- | --- |
@@ -184,7 +202,7 @@ The two-phase `capture-locales.mjs` workflow also writes these Hebrew and German
 | עברית · RTL | [Desktop](docs/screenshots/landing-hebrew-desktop.png) · [Phone](docs/screenshots/landing-hebrew-mobile.png) | [Desktop](docs/screenshots/dashboard-hebrew.png) · [Phone](docs/screenshots/dashboard-hebrew-mobile.png) | [Desktop](docs/screenshots/simulator-hebrew.png) · [Phone](docs/screenshots/simulator-hebrew-mobile.png) |
 | Deutsch · LTR | [Desktop](docs/screenshots/landing-german-desktop.png) · [Phone](docs/screenshots/landing-german-mobile.png) | [Desktop](docs/screenshots/dashboard-german.png) · [Phone](docs/screenshots/dashboard-german-mobile.png) | [Desktop](docs/screenshots/simulator-german.png) · [Phone](docs/screenshots/simulator-german-mobile.png) |
 
-The GitHub Actions workflow runs lint, type checking, money/calendar tests, PGlite integration tests, a production build and Playwright workflows. A separate job runs the integration suite against PostgreSQL 17. Browser failures upload diagnostic artifacts for seven days.
+The GitHub Actions workflow runs dependency audit, configuration checks, lint, type checking, money/calendar tests, PGlite integration tests, a production build, actual stop/start persistence verification and Playwright workflows including accessibility checks. A separate job runs the integration suite against PostgreSQL 17. Browser failures upload diagnostic artifacts for seven days.
 
 Tests exercise exact balances, transfer conservation, transaction update/deletion, budget derivation, goal allocation, input validation, ownership isolation, atomic import and duplicate prevention, due schedules, authentication, CSV/JSON export, session persistence, demo isolation and cross-origin request rejection. Test success and CI status are reported from actual executions in the delivery message, not assumed from the presence of this workflow.
 

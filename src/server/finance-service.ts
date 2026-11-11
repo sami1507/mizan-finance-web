@@ -101,8 +101,16 @@ async function claimEvent(tx: Tx, userId: string, key: string): Promise<boolean>
   return inserted.length > 0;
 }
 
-export async function mutateFinance(userId: string, payload: unknown): Promise<Snapshot & { imported?: number; skipped?: number; processed?: number }> {
+function canonicalJson(value: unknown): string {
+  if (Array.isArray(value)) return `[${value.map(canonicalJson).join(",")}]`;
+  if (value && typeof value === "object") return `{${Object.entries(value).sort(([a], [b]) => a.localeCompare(b)).map(([key, entry]) => `${JSON.stringify(key)}:${canonicalJson(entry)}`).join(",")}}`;
+  return JSON.stringify(value) ?? "null";
+}
+
+export async function mutateFinance(userId: string, payload: unknown, requestId?: string): Promise<Snapshot & { imported?: number; skipped?: number; processed?: number }> {
   const input = z.object({ action: z.string() }).passthrough().parse(payload);
+  const retryKey = requestId === undefined ? undefined : z.string().uuid().parse(requestId);
+  const payloadHash = retryKey ? createHash("sha256").update(canonicalJson(input)).digest("hex") : undefined;
   await ensureProfile(userId);
   const db = await getDb();
   let imported: number | undefined, skipped: number | undefined, processed: number | undefined;
@@ -110,6 +118,14 @@ export async function mutateFinance(userId: string, payload: unknown): Promise<S
     // One user-level row lock serializes ledger writes and read/check/write invariants across workers.
     const [owner] = await tx.select().from(s.user).where(eq(s.user.id, userId)).for("update");
     if (!owner) throw new v.ServiceError("Session expired.", 401);
+    if (retryKey) {
+      const [previous] = await tx.select().from(s.mutationRequests).where(and(eq(s.mutationRequests.userId, userId), eq(s.mutationRequests.requestId, retryKey)));
+      if (previous) {
+        if (previous.payloadHash !== payloadHash) throw new v.ServiceError("This request was already used for different changes.", 409);
+        ({ imported, skipped, processed } = previous.result);
+        return;
+      }
+    }
     switch (input.action) {
       case "onboarding": {
         const data = v.onboardingSchema.parse(input);
@@ -241,6 +257,7 @@ export async function mutateFinance(userId: string, payload: unknown): Promise<S
       }
       default: throw new v.ServiceError("Unknown action.");
     }
+    if (retryKey) await tx.insert(s.mutationRequests).values({ userId, requestId: retryKey, payloadHash: payloadHash!, result: { ...(imported === undefined ? {} : { imported, skipped }), ...(processed === undefined ? {} : { processed }) } });
   });
   return { ...await getSnapshot(userId), ...(imported === undefined ? {} : { imported, skipped }), ...(processed === undefined ? {} : { processed }) };
 }

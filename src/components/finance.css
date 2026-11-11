@@ -310,6 +310,7 @@
 .spend-legend strong { font-size: 13px; font-weight: 550; white-space: nowrap; }
 .spend-legend small { width: 34px; color: var(--muted); font-size: 12px; text-align: end; }
 .table-scroll { width: 100%; overflow: auto; scrollbar-width: thin; scrollbar-color: var(--border) transparent; }
+.table-scroll:focus-visible { outline: 3px solid var(--focus); outline-offset: -3px; }
 .finance-app table { width: 100%; border-collapse: collapse; text-align: start; white-space: nowrap; }
 .finance-app th { position: relative; padding: 13px 20px; border-block: 1px solid var(--border); background: var(--soft-ink); color: var(--muted); font-size: 12px; font-weight: 550; text-align: start; }
 .finance-app td { padding: 16px 20px; border-bottom: 1px solid var(--border); font-size: 13px; }
@@ -515,6 +516,9 @@
 .form-field textarea { resize: vertical; }
 .dialog-footer { display: flex; justify-content: flex-end; gap: 12px; margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--border); }
 .form-error { margin: 16px 0 0; color: var(--danger); font-size: 13px; line-height: 1.9; }
+.session-recovery { display: grid; gap: 8px; margin-block: 16px; line-height: 1.8; font-size: 13px; }
+.session-recovery p { margin: 0; color: var(--muted); }
+.session-recovery a { text-decoration: underline; text-underline-offset: 4px; }
 
 /* Feedback and import are utilities, not additional decorative cards. */
 .feedback { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; padding: 16px 19px; border-radius: 8px; font-size: 13px; line-height: 1.8; }
@@ -537,7 +541,7 @@
 .loading-page > p { margin-top: 26px; color: var(--muted); font-size: 13px; text-align: center; }
 .load-failed .skeleton,
 .load-failed > p { display: none; }
-.import-body { padding: 0 24px 26px; }
+.import-body.form-controls { padding: 0 24px 26px; }
 .file-drop { position: relative; display: flex; flex-direction: column; align-items: center; gap: 11px; padding: 28px; border: 1px dashed var(--control-border, var(--border)); border-radius: 8px; background: var(--bg); color: var(--green); text-align: center; cursor: pointer; }
 .file-drop strong { font-size: 14px; }
 .file-drop span { color: var(--muted); font-size: 13px; line-height: 1.8; }
@@ -853,7 +857,7 @@
   .toast > button { flex-shrink: 0; margin-inline-start: auto; }
   .mapping-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 17px 13px; }
   .mapping-defaults { grid-template-columns: minmax(0, 1fr); gap: 18px; padding: 18px; }
-  .import-body { padding-inline: 20px; }
+  .import-body.form-controls { padding-inline: 20px; }
   .file-drop { padding: 24px 18px; }
   .file-drop span { font-size: 13px; }
   .import-summary { gap: 11px; font-size: 13px; }

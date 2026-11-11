@@ -1,4 +1,4 @@
-import { pgTable, text, boolean, timestamp, bigint, date, uniqueIndex, index } from "drizzle-orm/pg-core";
+import { pgTable, text, boolean, timestamp, bigint, date, uniqueIndex, index, jsonb } from "drizzle-orm/pg-core";
 
 export const user = pgTable("app_user", {
   id: text("id").primaryKey(), name: text("name").notNull(), email: text("email").notNull().unique(),
@@ -64,3 +64,8 @@ export const demoSessions = pgTable("demo_sessions", {
 export const processedEvents = pgTable("processed_events", {
   id: text("id").primaryKey(), userId: owner(), key: text("key").notNull(), createdAt: timestamp("created_at").notNull().defaultNow(),
 }, table => [uniqueIndex("processed_events_owner_key_uq").on(table.userId, table.key)]);
+export const mutationRequests = pgTable("mutation_requests", {
+  userId: owner(), requestId: text("request_id").notNull(), payloadHash: text("payload_hash").notNull(),
+  result: jsonb("result").$type<{ imported?: number; skipped?: number; processed?: number }>().notNull(),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+}, table => [uniqueIndex("mutation_requests_owner_request_uq").on(table.userId, table.requestId)]);

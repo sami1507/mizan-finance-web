@@ -2,6 +2,15 @@ export const CSV_COLUMNS = ["date", "kind", "amount", "accountId", "categoryId",
 export type CsvColumn = typeof CSV_COLUMNS[number];
 export type CsvMapping = Record<CsvColumn, string>;
 
+export const CSV_NOTE_ENCODING = "spreadsheet-safe-v1";
+export function needsSpreadsheetEscape(value: string): boolean {
+  return /^[\s]*[=+\-@\t\r]/.test(value);
+}
+// Only our explicit row marker authorizes decoding; an ordinary leading apostrophe is user data.
+export function decodeCsvNote(value: string, encoding?: string): string {
+  return encoding === CSV_NOTE_ENCODING && value.startsWith("'") && needsSpreadsheetEscape(value.slice(1)) ? value.slice(1) : value;
+}
+
 const aliases: Record<CsvColumn, string[]> = {
   date: ["date", "التاريخ", "datum", "תאריך"],
   kind: ["kind", "type", "النوع", "typ", "art", "סוג"],

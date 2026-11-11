@@ -1,0 +1,1351 @@
+{
+  "checkedAt": "2026-11-11T22:13:12.716Z",
+  "baseURL": "http://127.0.0.1:3200",
+  "data": "Isolated synthetic demo",
+  "results": [
+    {
+      "locale": "ar",
+      "theme": "light",
+      "caption": [
+        {
+          "text": "لقطة من المنصة ببيانات تجريبية قابلة للتعديل",
+          "foreground": "rgb(88, 105, 115)",
+          "fill": "rgb(0, 0, 0)",
+          "opacity": "1",
+          "fontSize": "12px",
+          "fontWeight": "400",
+          "backgrounds": [
+            {
+              "element": "BODY.",
+              "background": "rgb(247, 245, 240)",
+              "image": "none",
+              "opacity": "1"
+            }
+          ],
+          "rect": {
+            "x": 128,
+            "y": 1553.3125,
+            "width": 1184,
+            "height": 19.796875
+          }
+        }
+      ],
+      "entries": {
+        ".wealth-card .stat-label": [
+          {
+            "text": "إجمالي الأرصدة",
+            "foreground": "rgb(202, 212, 217)",
+            "fill": "rgb(0, 0, 0)",
+            "opacity": "1",
+            "fontSize": "13px",
+            "fontWeight": "500",
+            "backgrounds": [
+              {
+                "element": "ARTICLE.stat-card wealth-card",
+                "background": "rgb(23, 45, 56)",
+                "image": "none",
+                "opacity": "1"
+              },
+              {
+                "element": "DIV.stats-grid",
+                "background": "rgb(255, 255, 255)",
+                "image": "none",
+                "opacity": "1"
+              },
+              {
+                "element": "DIV.finance-app",
+                "background": "rgb(247, 245, 240)",
+                "image": "none",
+                "opacity": "1"
+              },
+              {
+                "element": "BODY.",
+                "background": "rgb(247, 245, 240)",
+                "image": "none",
+                "opacity": "1"
+              }
+            ],
+            "rect": {
+              "x": 875.875,
+              "y": 351.0625,
+              "width": 269.125,
+              "height": 22.09375
+            }
+          }
+        ],
+        ".wealth-card .stat-foot": [
+          {
+            "text": "3 حساباتأموالك، في مكان واحد",
+            "foreground": "rgb(189, 203, 209)",
+            "fill": "rgb(0, 0, 0)",
+            "opacity": "1",
+            "fontSize": "12px",
+            "fontWeight": "400",
+            "backgrounds": [
+              {
+                "element": "ARTICLE.stat-card wealth-card",
+                "background": "rgb(23, 45, 56)",
+                "image": "none",
+                "opacity": "1"
+              },
+              {
+                "element": "DIV.stats-grid",
+                "background": "rgb(255, 255, 255)",
+                "image": "none",
+                "opacity": "1"
+              },
+              {
+                "element": "DIV.finance-app",
+                "background": "rgb(247, 245, 240)",
+                "image": "none",
+                "opacity": "1"
+              },
+              {
+                "element": "BODY.",
+                "background": "rgb(247, 245, 240)",
+                "image": "none",
+                "opacity": "1"
+              }
+            ],
+            "rect": {
+              "x": 875.875,
+              "y": 445.28125,
+              "width": 269.125,
+              "height": 20.390625
+            }
+          }
+        ],
+        ".wealth-card .light-pill": [
+          {
+            "text": "3 حسابات",
+            "foreground": "rgb(241, 243, 241)",
+            "fill": "rgb(0, 0, 0)",
+            "opacity": "1",
+            "fontSize": "12px",
+            "fontWeight": "550",
+            "backgrounds": [
+              {
+                "element": "ARTICLE.stat-card wealth-card",
+                "background": "rgb(23, 45, 56)",
+                "image": "none",
+                "opacity": "1"
+              },
+              {
+                "element": "DIV.stats-grid",
+                "background": "rgb(255, 255, 255)",
+                "image": "none",
+                "opacity": "1"
+              },
+              {
+                "element": "DIV.finance-app",
+                "background": "rgb(247, 245, 240)",
+                "image": "none",
+                "opacity": "1"
+              },
+              {
+                "element": "BODY.",
+                "background": "rgb(247, 245, 240)",
+                "image": "none",
+                "opacity": "1"
+              }
+            ],
+            "rect": {
+              "x": 1084.546875,
+              "y": 445.28125,
+              "width": 60.453125,
+              "height": 20.390625
+            }
+          }
+        ],
+        ".wealth-card .stat-foot > span:nth-child(2)": [
+          {
+            "text": "أموالك، في مكان واحد",
+            "foreground": "rgb(189, 203, 209)",
+            "fill": "rgb(0, 0, 0)",
+            "opacity": "1",
+            "fontSize": "12px",
+            "fontWeight": "400",
+            "backgrounds": [
+              {
+                "element": "ARTICLE.stat-card wealth-card",
+                "background": "rgb(23, 45, 56)",
+                "image": "none",
+                "opacity": "1"
+              },
+              {
+                "element": "DIV.stats-grid",
+                "background": "rgb(255, 255, 255)",
+                "image": "none",
+                "opacity": "1"
+              },
+              {
+                "element": "DIV.finance-app",
+                "background": "rgb(247, 245, 240)",
+                "image": "none",
+                "opacity": "1"
+              },
+              {
+                "element": "BODY.",
+                "background": "rgb(247, 245, 240)",
+                "image": "none",
+                "opacity": "1"
+              }
+            ],
+            "rect": {
+              "x": 971.234375,
+              "y": 445.28125,
+              "width": 105.3125,
+              "height": 20.390625
+            }
+          }
+        ],
+        ".cashflow-chart tspan": [
+          {
+            "text": "يونيو",
+            "foreground": "rgb(23, 45, 56)",
+            "fill": "rgb(88, 105, 115)",
+            "opacity": "1",
+            "fontSize": "12px",
+            "fontWeight": "400",
+            "backgrounds": [
+              {
+                "element": "SECTION.panel ",
+                "background": "rgb(255, 255, 255)",
+                "image": "none",
+                "opacity": "1"
+              },
+              {
+                "element": "DIV.finance-app",
+                "background": "rgb(247, 245, 240)",
+                "image": "none",
+                "opacity": "1"
+              },
+              {
+                "element": "BODY.",
+                "background": "rgb(247, 245, 240)",
+                "image": "none",
+                "opacity": "1"
+              }
+            ],
+            "rect": {
+              "x": 567.890625,
+              "y": 957.25439453125,
+              "width": 23.031982421875,
+              "height": 16
+            }
+          },
+          {
+            "text": "يوليو",
+            "foreground": "rgb(23, 45, 56)",
+            "fill": "rgb(88, 105, 115)",
+            "opacity": "1",
+            "fontSize": "12px",
+            "fontWeight": "400",
+            "backgrounds": [
+              {
+                "element": "SECTION.panel ",
+                "background": "rgb(255, 255, 255)",
+                "image": "none",
+                "opacity": "1"
+              },
+              {
+                "element": "DIV.finance-app",
+                "background": "rgb(247, 245, 240)",
+                "image": "none",
+                "opacity": "1"
+              },
+              {
+                "element": "BODY.",
+                "background": "rgb(247, 245, 240)",
+                "image": "none",
+                "opacity": "1"
+              }
+            ],
+            "rect": {
+              "x": 680.3453369140625,
+              "y": 957.25439453125,
+              "width": 22.9239501953125,
+              "height": 16
+            }
+          },
+          {
+            "text": "أغسطس",
+            "foreground": "rgb(23, 45, 56)",
+            "fill": "rgb(88, 105, 115)",
+            "opacity": "1",
+            "fontSize": "12px",
+            "fontWeight": "400",
+            "backgrounds": [
+              {
+                "element": "SECTION.panel ",
+                "background": "rgb(255, 255, 255)",
+                "image": "none",
+                "opacity": "1"
+              },
+              {
+                "element": "DIV.finance-app",
+                "background": "rgb(247, 245, 240)",
+                "image": "none",
+                "opacity": "1"
+              },
+              {
+                "element": "BODY.",
+                "background": "rgb(247, 245, 240)",
+                "image": "none",
+                "opacity": "1"
+              }
+            ],
+            "rect": {
+              "x": 782.5968627929688,
+              "y": 957.25439453125,
+              "width": 42.98394775390625,
+              "height": 16
+            }
+          },
+          {
+            "text": "سبتمبر",
+            "foreground": "rgb(23, 45, 56)",
+            "fill": "rgb(88, 105, 115)",
+            "opacity": "1",
+            "fontSize": "12px",
+            "fontWeight": "400",
+            "backgrounds": [
+              {
+                "element": "SECTION.panel ",
+                "background": "rgb(255, 255, 255)",
+                "image": "none",
+                "opacity": "1"
+              },
+              {
+                "element": "DIV.finance-app",
+                "background": "rgb(247, 245, 240)",
+                "image": "none",
+                "opacity": "1"
+              },
+              {
+                "element": "BODY.",
+                "background": "rgb(247, 245, 240)",
+                "image": "none",
+                "opacity": "1"
+              }
+            ],
+            "rect": {
+              "x": 898.4968872070312,
+              "y": 957.25439453125,
+              "width": 35.39599609375,
+              "height": 16
+            }
+          },
+          {
+            "text": "أكتوبر",
+            "foreground": "rgb(23, 45, 56)",
+            "fill": "rgb(88, 105, 115)",
+            "opacity": "1",
+            "fontSize": "12px",
+            "fontWeight": "400",
+            "backgrounds": [
+              {
+                "element": "SECTION.panel ",
+                "background": "rgb(255, 255, 255)",
+                "image": "none",
+                "opacity": "1"
+              },
+              {
+                "element": "DIV.finance-app",
+                "background": "rgb(247, 245, 240)",
+                "image": "none",
+                "opacity": "1"
+              },
+              {
+                "element": "BODY.",
+                "background": "rgb(247, 245, 240)",
+                "image": "none",
+                "opacity": "1"
+              }
+            ],
+            "rect": {
+              "x": 1014.8578491210938,
+              "y": 957.25439453125,
+              "width": 27.06402587890625,
+              "height": 16
+            }
+          },
+          {
+            "text": "نوفمبر",
+            "foreground": "rgb(23, 45, 56)",
+            "fill": "rgb(88, 105, 115)",
+            "opacity": "1",
+            "fontSize": "12px",
+            "fontWeight": "400",
+            "backgrounds": [
+              {
+                "element": "SECTION.panel ",
+                "background": "rgb(255, 255, 255)",
+                "image": "none",
+                "opacity": "1"
+              },
+              {
+                "element": "DIV.finance-app",
+                "background": "rgb(247, 245, 240)",
+                "image": "none",
+                "opacity": "1"
+              },
+              {
+                "element": "BODY.",
+                "background": "rgb(247, 245, 240)",
+                "image": "none",
+                "opacity": "1"
+              }
+            ],
+            "rect": {
+              "x": 1118.140625,
+              "y": 957.25439453125,
+              "width": 31.0625,
+              "height": 16
+            }
+          },
+          {
+            "text": "٠",
+            "foreground": "rgb(23, 45, 56)",
+            "fill": "rgb(88, 105, 115)",
+            "opacity": "1",
+            "fontSize": "12px",
+            "fontWeight": "400",
+            "backgrounds": [
+              {
+                "element": "SECTION.panel ",
+                "background": "rgb(255, 255, 255)",
+                "image": "none",
+                "opacity": "1"
+              },
+              {
+                "element": "DIV.finance-app",
+                "background": "rgb(247, 245, 240)",
+                "image": "none",
+                "opacity": "1"
+              },
+              {
+                "element": "BODY.",
+                "background": "rgb(247, 245, 240)",
+                "image": "none",
+                "opacity": "1"
+              }
+            ],
+            "rect": {
+              "x": 564.328125,
+              "y": 934.994384765625,
+              "width": 6.875,
+              "height": 16
+            }
+          },
+          {
+            "text": "٣ آلاف",
+            "foreground": "rgb(23, 45, 56)",
+            "fill": "rgb(88, 105, 115)",
+            "opacity": "1",
+            "fontSize": "12px",
+            "fontWeight": "400",
+            "backgrounds": [
+              {
+                "element": "SECTION.panel ",
+                "background": "rgb(255, 255, 255)",
+                "image": "none",
+                "opacity": "1"
+              },
+              {
+                "element": "DIV.finance-app",
+                "background": "rgb(247, 245, 240)",
+                "image": "none",
+                "opacity": "1"
+              },
+              {
+                "element": "BODY.",
+                "background": "rgb(247, 245, 240)",
+                "image": "none",
+                "opacity": "1"
+              }
+            ],
+            "rect": {
+              "x": 539.53125,
+              "y": 870.494384765625,
+              "width": 31.796875,
+              "height": 16
+            }
+          },
+          {
+            "text": "٦ آلاف",
+            "foreground": "rgb(23, 45, 56)",
+            "fill": "rgb(88, 105, 115)",
+            "opacity": "1",
+            "fontSize": "12px",
+            "fontWeight": "400",
+            "backgrounds": [
+              {
+                "element": "SECTION.panel ",
+                "background": "rgb(255, 255, 255)",
+                "image": "none",
+                "opacity": "1"
+              },
+              {
+                "element": "DIV.finance-app",
+                "background": "rgb(247, 245, 240)",
+                "image": "none",
+                "opacity": "1"
+              },
+              {
+                "element": "BODY.",
+                "background": "rgb(247, 245, 240)",
+                "image": "none",
+                "opacity": "1"
+              }
+            ],
+            "rect": {
+              "x": 539.53125,
+              "y": 805.994384765625,
+              "width": 31.796875,
+              "height": 16
+            }
+          },
+          {
+            "text": "٩ آلاف",
+            "foreground": "rgb(23, 45, 56)",
+            "fill": "rgb(88, 105, 115)",
+            "opacity": "1",
+            "fontSize": "12px",
+            "fontWeight": "400",
+            "backgrounds": [
+              {
+                "element": "SECTION.panel ",
+                "background": "rgb(255, 255, 255)",
+                "image": "none",
+                "opacity": "1"
+              },
+              {
+                "element": "DIV.finance-app",
+                "background": "rgb(247, 245, 240)",
+                "image": "none",
+                "opacity": "1"
+              },
+              {
+                "element": "BODY.",
+                "background": "rgb(247, 245, 240)",
+                "image": "none",
+                "opacity": "1"
+              }
+            ],
+            "rect": {
+              "x": 539.53125,
+              "y": 741.494384765625,
+              "width": 31.796875,
+              "height": 16
+            }
+          },
+          {
+            "text": "١٢ ألف",
+            "foreground": "rgb(23, 45, 56)",
+            "fill": "rgb(88, 105, 115)",
+            "opacity": "1",
+            "fontSize": "12px",
+            "fontWeight": "400",
+            "backgrounds": [
+              {
+                "element": "SECTION.panel ",
+                "background": "rgb(255, 255, 255)",
+                "image": "none",
+                "opacity": "1"
+              },
+              {
+                "element": "DIV.finance-app",
+                "background": "rgb(247, 245, 240)",
+                "image": "none",
+                "opacity": "1"
+              },
+              {
+                "element": "BODY.",
+                "background": "rgb(247, 245, 240)",
+                "image": "none",
+                "opacity": "1"
+              }
+            ],
+            "rect": {
+              "x": 535.15625,
+              "y": 676.994384765625,
+              "width": 36.176513671875,
+              "height": 16
+            }
+          }
+        ],
+        ".donut-center span": [
+          {
+            "text": "إجمالي الإنفاق",
+            "foreground": "rgb(88, 105, 115)",
+            "fill": "rgb(0, 0, 0)",
+            "opacity": "1",
+            "fontSize": "12px",
+            "fontWeight": "400",
+            "backgrounds": [
+              {
+                "element": "SECTION.panel ",
+                "background": "rgb(255, 255, 255)",
+                "image": "none",
+                "opacity": "1"
+              },
+              {
+                "element": "DIV.finance-app",
+                "background": "rgb(247, 245, 240)",
+                "image": "none",
+                "opacity": "1"
+              },
+              {
+                "element": "BODY.",
+                "background": "rgb(247, 245, 240)",
+                "image": "none",
+                "opacity": "1"
+              }
+            ],
+            "rect": {
+              "x": 223.984375,
+              "y": 729.9375,
+              "width": 67.25,
+              "height": 20.390625
+            }
+          }
+        ],
+        ".donut-center strong": [
+          {
+            "text": "‏٥٬١٣٩٫٠٠ ₪",
+            "foreground": "rgb(23, 45, 56)",
+            "fill": "rgb(0, 0, 0)",
+            "opacity": "1",
+            "fontSize": "23px",
+            "fontWeight": "600",
+            "backgrounds": [
+              {
+                "element": "SECTION.panel ",
+                "background": "rgb(255, 255, 255)",
+                "image": "none",
+                "opacity": "1"
+              },
+              {
+                "element": "DIV.finance-app",
+                "background": "rgb(247, 245, 240)",
+                "image": "none",
+                "opacity": "1"
+              },
+              {
+                "element": "BODY.",
+                "background": "rgb(247, 245, 240)",
+                "image": "none",
+                "opacity": "1"
+              }
+            ],
+            "rect": {
+              "x": 203.265625,
+              "y": 757.328125,
+              "width": 108.6875,
+              "height": 32.1875
+            }
+          }
+        ]
+      },
+      "graph": {
+        "fills": [
+          {
+            "color": "rgb(8, 127, 96)",
+            "opacity": "0.15"
+          },
+          {
+            "color": "rgb(8, 127, 96)",
+            "opacity": "0"
+          }
+        ],
+        "bounds": [
+          {
+            "x": 579.203125,
+            "y": 718.0593872070312,
+            "width": 562,
+            "height": 224.67498779296875
+          },
+          {
+            "x": 579.203125,
+            "y": 830.203369140625,
+            "width": 562,
+            "height": 112.531005859375
+          }
+        ]
+      }
+    },
+    {
+      "locale": "en",
+      "theme": "dark",
+      "caption": [
+        {
+          "text": "A real workspace with sample data you can edit",
+          "foreground": "rgb(179, 192, 200)",
+          "fill": "rgb(0, 0, 0)",
+          "opacity": "1",
+          "fontSize": "12px",
+          "fontWeight": "400",
+          "backgrounds": [
+            {
+              "element": "BODY.",
+              "background": "rgb(17, 30, 39)",
+              "image": "none",
+              "opacity": "1"
+            }
+          ],
+          "rect": {
+            "x": 128,
+            "y": 1553.3125,
+            "width": 1184,
+            "height": 19.796875
+          }
+        }
+      ],
+      "entries": {
+        ".wealth-card .stat-label": [
+          {
+            "text": "Total balance",
+            "foreground": "rgb(197, 210, 217)",
+            "fill": "rgb(0, 0, 0)",
+            "opacity": "1",
+            "fontSize": "13px",
+            "fontWeight": "500",
+            "backgrounds": [
+              {
+                "element": "ARTICLE.stat-card wealth-card",
+                "background": "rgb(35, 60, 73)",
+                "image": "none",
+                "opacity": "1"
+              },
+              {
+                "element": "DIV.stats-grid",
+                "background": "rgb(25, 42, 53)",
+                "image": "none",
+                "opacity": "1"
+              },
+              {
+                "element": "DIV.finance-app",
+                "background": "rgb(17, 30, 39)",
+                "image": "none",
+                "opacity": "1"
+              },
+              {
+                "element": "BODY.",
+                "background": "rgb(17, 30, 39)",
+                "image": "none",
+                "opacity": "1"
+              }
+            ],
+            "rect": {
+              "x": 295,
+              "y": 351.0625,
+              "width": 269.125,
+              "height": 22.09375
+            }
+          }
+        ],
+        ".wealth-card .stat-foot": [
+          {
+            "text": "3 accountsYour money, together",
+            "foreground": "rgb(197, 210, 217)",
+            "fill": "rgb(0, 0, 0)",
+            "opacity": "1",
+            "fontSize": "12px",
+            "fontWeight": "400",
+            "backgrounds": [
+              {
+                "element": "ARTICLE.stat-card wealth-card",
+                "background": "rgb(35, 60, 73)",
+                "image": "none",
+                "opacity": "1"
+              },
+              {
+                "element": "DIV.stats-grid",
+                "background": "rgb(25, 42, 53)",
+                "image": "none",
+                "opacity": "1"
+              },
+              {
+                "element": "DIV.finance-app",
+                "background": "rgb(17, 30, 39)",
+                "image": "none",
+                "opacity": "1"
+              },
+              {
+                "element": "BODY.",
+                "background": "rgb(17, 30, 39)",
+                "image": "none",
+                "opacity": "1"
+              }
+            ],
+            "rect": {
+              "x": 295,
+              "y": 445.28125,
+              "width": 269.125,
+              "height": 20.390625
+            }
+          }
+        ],
+        ".wealth-card .light-pill": [
+          {
+            "text": "3 accounts",
+            "foreground": "rgb(241, 243, 241)",
+            "fill": "rgb(0, 0, 0)",
+            "opacity": "1",
+            "fontSize": "12px",
+            "fontWeight": "550",
+            "backgrounds": [
+              {
+                "element": "ARTICLE.stat-card wealth-card",
+                "background": "rgb(35, 60, 73)",
+                "image": "none",
+                "opacity": "1"
+              },
+              {
+                "element": "DIV.stats-grid",
+                "background": "rgb(25, 42, 53)",
+                "image": "none",
+                "opacity": "1"
+              },
+              {
+                "element": "DIV.finance-app",
+                "background": "rgb(17, 30, 39)",
+                "image": "none",
+                "opacity": "1"
+              },
+              {
+                "element": "BODY.",
+                "background": "rgb(17, 30, 39)",
+                "image": "none",
+                "opacity": "1"
+              }
+            ],
+            "rect": {
+              "x": 295,
+              "y": 445.28125,
+              "width": 72.796875,
+              "height": 20.390625
+            }
+          }
+        ],
+        ".wealth-card .stat-foot > span:nth-child(2)": [
+          {
+            "text": "Your money, together",
+            "foreground": "rgb(197, 210, 217)",
+            "fill": "rgb(0, 0, 0)",
+            "opacity": "1",
+            "fontSize": "12px",
+            "fontWeight": "400",
+            "backgrounds": [
+              {
+                "element": "ARTICLE.stat-card wealth-card",
+                "background": "rgb(35, 60, 73)",
+                "image": "none",
+                "opacity": "1"
+              },
+              {
+                "element": "DIV.stats-grid",
+                "background": "rgb(25, 42, 53)",
+                "image": "none",
+                "opacity": "1"
+              },
+              {
+                "element": "DIV.finance-app",
+                "background": "rgb(17, 30, 39)",
+                "image": "none",
+                "opacity": "1"
+              },
+              {
+                "element": "BODY.",
+                "background": "rgb(17, 30, 39)",
+                "image": "none",
+                "opacity": "1"
+              }
+            ],
+            "rect": {
+              "x": 375.796875,
+              "y": 445.28125,
+              "width": 117.46875,
+              "height": 20.390625
+            }
+          }
+        ],
+        ".cashflow-chart tspan": [
+          {
+            "text": "Jun",
+            "foreground": "rgb(238, 243, 244)",
+            "fill": "rgb(179, 192, 200)",
+            "opacity": "1",
+            "fontSize": "12px",
+            "fontWeight": "400",
+            "backgrounds": [
+              {
+                "element": "SECTION.panel ",
+                "background": "rgb(25, 42, 53)",
+                "image": "none",
+                "opacity": "1"
+              },
+              {
+                "element": "DIV.finance-app",
+                "background": "rgb(17, 30, 39)",
+                "image": "none",
+                "opacity": "1"
+              },
+              {
+                "element": "BODY.",
+                "background": "rgb(17, 30, 39)",
+                "image": "none",
+                "opacity": "1"
+              }
+            ],
+            "rect": {
+              "x": 338.109375,
+              "y": 957.25439453125,
+              "width": 19.88800048828125,
+              "height": 16
+            }
+          },
+          {
+            "text": "Jul",
+            "foreground": "rgb(238, 243, 244)",
+            "fill": "rgb(179, 192, 200)",
+            "opacity": "1",
+            "fontSize": "12px",
+            "fontWeight": "400",
+            "backgrounds": [
+              {
+                "element": "SECTION.panel ",
+                "background": "rgb(25, 42, 53)",
+                "image": "none",
+                "opacity": "1"
+              },
+              {
+                "element": "DIV.finance-app",
+                "background": "rgb(17, 30, 39)",
+                "image": "none",
+                "opacity": "1"
+              },
+              {
+                "element": "BODY.",
+                "background": "rgb(17, 30, 39)",
+                "image": "none",
+                "opacity": "1"
+              }
+            ],
+            "rect": {
+              "x": 452.6109313964844,
+              "y": 957.25439453125,
+              "width": 15.887969970703125,
+              "height": 16
+            }
+          },
+          {
+            "text": "Aug",
+            "foreground": "rgb(238, 243, 244)",
+            "fill": "rgb(179, 192, 200)",
+            "opacity": "1",
+            "fontSize": "12px",
+            "fontWeight": "400",
+            "backgrounds": [
+              {
+                "element": "SECTION.panel ",
+                "background": "rgb(25, 42, 53)",
+                "image": "none",
+                "opacity": "1"
+              },
+              {
+                "element": "DIV.finance-app",
+                "background": "rgb(17, 30, 39)",
+                "image": "none",
+                "opacity": "1"
+              },
+              {
+                "element": "BODY.",
+                "background": "rgb(17, 30, 39)",
+                "image": "none",
+                "opacity": "1"
+              }
+            ],
+            "rect": {
+              "x": 562.0890502929688,
+              "y": 957.25439453125,
+              "width": 21.71197509765625,
+              "height": 16
+            }
+          },
+          {
+            "text": "Sept",
+            "foreground": "rgb(238, 243, 244)",
+            "fill": "rgb(179, 192, 200)",
+            "opacity": "1",
+            "fontSize": "12px",
+            "fontWeight": "400",
+            "backgrounds": [
+              {
+                "element": "SECTION.panel ",
+                "background": "rgb(25, 42, 53)",
+                "image": "none",
+                "opacity": "1"
+              },
+              {
+                "element": "DIV.finance-app",
+                "background": "rgb(17, 30, 39)",
+                "image": "none",
+                "opacity": "1"
+              },
+              {
+                "element": "BODY.",
+                "background": "rgb(17, 30, 39)",
+                "image": "none",
+                "opacity": "1"
+              }
+            ],
+            "rect": {
+              "x": 672.3171997070312,
+              "y": 957.25439453125,
+              "width": 26.0479736328125,
+              "height": 16
+            }
+          },
+          {
+            "text": "Oct",
+            "foreground": "rgb(238, 243, 244)",
+            "fill": "rgb(179, 192, 200)",
+            "opacity": "1",
+            "fontSize": "12px",
+            "fontWeight": "400",
+            "backgrounds": [
+              {
+                "element": "SECTION.panel ",
+                "background": "rgb(25, 42, 53)",
+                "image": "none",
+                "opacity": "1"
+              },
+              {
+                "element": "DIV.finance-app",
+                "background": "rgb(17, 30, 39)",
+                "image": "none",
+                "opacity": "1"
+              },
+              {
+                "element": "BODY.",
+                "background": "rgb(17, 30, 39)",
+                "image": "none",
+                "opacity": "1"
+              }
+            ],
+            "rect": {
+              "x": 787.2484741210938,
+              "y": 957.25439453125,
+              "width": 20.9840087890625,
+              "height": 16
+            }
+          },
+          {
+            "text": "Nov",
+            "foreground": "rgb(238, 243, 244)",
+            "fill": "rgb(179, 192, 200)",
+            "opacity": "1",
+            "fontSize": "12px",
+            "fontWeight": "400",
+            "backgrounds": [
+              {
+                "element": "SECTION.panel ",
+                "background": "rgb(25, 42, 53)",
+                "image": "none",
+                "opacity": "1"
+              },
+              {
+                "element": "DIV.finance-app",
+                "background": "rgb(17, 30, 39)",
+                "image": "none",
+                "opacity": "1"
+              },
+              {
+                "element": "BODY.",
+                "background": "rgb(17, 30, 39)",
+                "image": "none",
+                "opacity": "1"
+              }
+            ],
+            "rect": {
+              "x": 896.5625,
+              "y": 957.25439453125,
+              "width": 22.10797119140625,
+              "height": 16
+            }
+          },
+          {
+            "text": "0",
+            "foreground": "rgb(238, 243, 244)",
+            "fill": "rgb(179, 192, 200)",
+            "opacity": "1",
+            "fontSize": "12px",
+            "fontWeight": "400",
+            "backgrounds": [
+              {
+                "element": "SECTION.panel ",
+                "background": "rgb(25, 42, 53)",
+                "image": "none",
+                "opacity": "1"
+              },
+              {
+                "element": "DIV.finance-app",
+                "background": "rgb(17, 30, 39)",
+                "image": "none",
+                "opacity": "1"
+              },
+              {
+                "element": "BODY.",
+                "background": "rgb(17, 30, 39)",
+                "image": "none",
+                "opacity": "1"
+              }
+            ],
+            "rect": {
+              "x": 331.78125,
+              "y": 934.994384765625,
+              "width": 8.21875,
+              "height": 16
+            }
+          },
+          {
+            "text": "3K",
+            "foreground": "rgb(238, 243, 244)",
+            "fill": "rgb(179, 192, 200)",
+            "opacity": "1",
+            "fontSize": "12px",
+            "fontWeight": "400",
+            "backgrounds": [
+              {
+                "element": "SECTION.panel ",
+                "background": "rgb(25, 42, 53)",
+                "image": "none",
+                "opacity": "1"
+              },
+              {
+                "element": "DIV.finance-app",
+                "background": "rgb(17, 30, 39)",
+                "image": "none",
+                "opacity": "1"
+              },
+              {
+                "element": "BODY.",
+                "background": "rgb(17, 30, 39)",
+                "image": "none",
+                "opacity": "1"
+              }
+            ],
+            "rect": {
+              "x": 325.890625,
+              "y": 870.494384765625,
+              "width": 14.109375,
+              "height": 16
+            }
+          },
+          {
+            "text": "6K",
+            "foreground": "rgb(238, 243, 244)",
+            "fill": "rgb(179, 192, 200)",
+            "opacity": "1",
+            "fontSize": "12px",
+            "fontWeight": "400",
+            "backgrounds": [
+              {
+                "element": "SECTION.panel ",
+                "background": "rgb(25, 42, 53)",
+                "image": "none",
+                "opacity": "1"
+              },
+              {
+                "element": "DIV.finance-app",
+                "background": "rgb(17, 30, 39)",
+                "image": "none",
+                "opacity": "1"
+              },
+              {
+                "element": "BODY.",
+                "background": "rgb(17, 30, 39)",
+                "image": "none",
+                "opacity": "1"
+              }
+            ],
+            "rect": {
+              "x": 325.453125,
+              "y": 805.994384765625,
+              "width": 14.546875,
+              "height": 16
+            }
+          },
+          {
+            "text": "9K",
+            "foreground": "rgb(238, 243, 244)",
+            "fill": "rgb(179, 192, 200)",
+            "opacity": "1",
+            "fontSize": "12px",
+            "fontWeight": "400",
+            "backgrounds": [
+              {
+                "element": "SECTION.panel ",
+                "background": "rgb(25, 42, 53)",
+                "image": "none",
+                "opacity": "1"
+              },
+              {
+                "element": "DIV.finance-app",
+                "background": "rgb(17, 30, 39)",
+                "image": "none",
+                "opacity": "1"
+              },
+              {
+                "element": "BODY.",
+                "background": "rgb(17, 30, 39)",
+                "image": "none",
+                "opacity": "1"
+              }
+            ],
+            "rect": {
+              "x": 325.453125,
+              "y": 741.494384765625,
+              "width": 14.546875,
+              "height": 16
+            }
+          },
+          {
+            "text": "12K",
+            "foreground": "rgb(238, 243, 244)",
+            "fill": "rgb(179, 192, 200)",
+            "opacity": "1",
+            "fontSize": "12px",
+            "fontWeight": "400",
+            "backgrounds": [
+              {
+                "element": "SECTION.panel ",
+                "background": "rgb(25, 42, 53)",
+                "image": "none",
+                "opacity": "1"
+              },
+              {
+                "element": "DIV.finance-app",
+                "background": "rgb(17, 30, 39)",
+                "image": "none",
+                "opacity": "1"
+              },
+              {
+                "element": "BODY.",
+                "background": "rgb(17, 30, 39)",
+                "image": "none",
+                "opacity": "1"
+              }
+            ],
+            "rect": {
+              "x": 322.328125,
+              "y": 676.994384765625,
+              "width": 17.671875,
+              "height": 16
+            }
+          }
+        ],
+        ".donut-center span": [
+          {
+            "text": "Total spent",
+            "foreground": "rgb(179, 192, 200)",
+            "fill": "rgb(0, 0, 0)",
+            "opacity": "1",
+            "fontSize": "12px",
+            "fontWeight": "400",
+            "backgrounds": [
+              {
+                "element": "SECTION.panel ",
+                "background": "rgb(25, 42, 53)",
+                "image": "none",
+                "opacity": "1"
+              },
+              {
+                "element": "DIV.finance-app",
+                "background": "rgb(17, 30, 39)",
+                "image": "none",
+                "opacity": "1"
+              },
+              {
+                "element": "BODY.",
+                "background": "rgb(17, 30, 39)",
+                "image": "none",
+                "opacity": "1"
+              }
+            ],
+            "rect": {
+              "x": 1151.59375,
+              "y": 729.9375,
+              "width": 61.578125,
+              "height": 20.390625
+            }
+          }
+        ],
+        ".donut-center strong": [
+          {
+            "text": "₪5,139.00",
+            "foreground": "rgb(238, 243, 244)",
+            "fill": "rgb(0, 0, 0)",
+            "opacity": "1",
+            "fontSize": "23px",
+            "fontWeight": "600",
+            "backgrounds": [
+              {
+                "element": "SECTION.panel ",
+                "background": "rgb(25, 42, 53)",
+                "image": "none",
+                "opacity": "1"
+              },
+              {
+                "element": "DIV.finance-app",
+                "background": "rgb(17, 30, 39)",
+                "image": "none",
+                "opacity": "1"
+              },
+              {
+                "element": "BODY.",
+                "background": "rgb(17, 30, 39)",
+                "image": "none",
+                "opacity": "1"
+              }
+            ],
+            "rect": {
+              "x": 1129.21875,
+              "y": 757.328125,
+              "width": 106.34375,
+              "height": 32.1875
+            }
+          }
+        ]
+      },
+      "graph": {
+        "fills": [
+          {
+            "color": "rgb(112, 210, 174)",
+            "opacity": "0.15"
+          },
+          {
+            "color": "rgb(112, 210, 174)",
+            "opacity": "0"
+          }
+        ],
+        "bounds": [
+          {
+            "x": 348,
+            "y": 718.0593872070312,
+            "width": 562,
+            "height": 224.67498779296875
+          },
+          {
+            "x": 348,
+            "y": 830.203369140625,
+            "width": 562,
+            "height": 112.531005859375
+          }
+        ]
+      }
+    }
+  ]
+}

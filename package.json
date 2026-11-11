@@ -11,7 +11,12 @@
     "test": "vitest run",
     "test:e2e": "playwright test",
     "db:migrate": "tsx scripts/migrate.ts",
-    "db:seed": "tsx scripts/seed.ts"
+    "db:seed": "tsx scripts/seed.ts",
+    "check:config": "tsx scripts/check-config.ts",
+    "brand:generate": "node scripts/generate-brand.mjs",
+    "review:delivery": "node scripts/review-delivery.mjs",
+    "demo:cleanup": "tsx scripts/cleanup-demos.ts",
+    "check:persistence": "node scripts/check-persistence.mjs"
   },
   "dependencies": {
     "@electric-sql/pglite": "0.5.15",
@@ -32,6 +37,7 @@
     "zod": "4.6.7"
   },
   "devDependencies": {
+    "@axe-core/playwright": "4.14.0",
     "@playwright/test": "1.58.2",
     "@tailwindcss/postcss": "4.3.4",
     "@types/node": "26.6.6",

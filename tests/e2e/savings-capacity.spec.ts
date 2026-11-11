@@ -17,7 +17,14 @@ async function change(page: Page, action: string, fields: Record<string, unknown
 }
 
 async function createDemo(page: Page, locale: Locale = "en") {
-  const response = await page.request.post("/api/demo", { headers: { Origin: origin }, data: { locale } });
+  let response = await page.request.post("/api/demo", { headers: { Origin: origin }, data: { locale } });
+  if (response.status() === 429) {
+    // The complete suite shares one IP; respect the application's real demo limit.
+    const retry = Number(response.headers()["retry-after"]);
+    const seconds = Number.isFinite(retry) && retry > 0 ? Math.min(retry + 1, 61) : 61;
+    await page.waitForTimeout(seconds * 1000);
+    response = await page.request.post("/api/demo", { headers: { Origin: origin }, data: { locale } });
+  }
   expect(response.ok(), await response.text()).toBe(true);
   const data = await snapshot(page);
   expect(data.demo).toBe(true);

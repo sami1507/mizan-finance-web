@@ -1,3 +1,4 @@
+import { ConfigurationError } from "../src/server/config";
 import "dotenv/config";
 import { getDb, closeDb } from "../src/server/db";
 import { user } from "../src/server/schema";
@@ -10,4 +11,4 @@ async function main() {
   console.log("Isolated sample dataset seeded. Use Try the demo in the application to create your own private demo session.");
   await closeDb();
 }
-main().catch(error => { console.error(error instanceof Error ? error.message : "Seed failed"); process.exitCode = 1; });
+main().catch(async error => { console.error(error instanceof ConfigurationError ? error.message : "Seed failed. Check configuration and database availability; no sensitive error details were logged."); await closeDb().catch(() => {}); process.exitCode = 1; });

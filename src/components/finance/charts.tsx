@@ -21,7 +21,7 @@ export function CashflowChart({ rows, currency, locale }: { rows: { key: string;
         </AreaChart>
       </ResponsiveContainer>
     </div>
-    <details className="chart-table"><summary>{t("عرض البيانات كجدول", "View data table")}</summary><div className="table-scroll"><table><thead><tr><th>{t("الشهر", "Month")}</th><th>{t("الدخل", "Income")}</th><th>{t("المصروفات", "Expenses")}</th></tr></thead><tbody>{data.map((r) => <tr key={r.key}><td>{r.label}</td><td>{money(r.income * 100, currency, locale)}</td><td>{money(r.expense * 100, currency, locale)}</td></tr>)}</tbody></table></div></details>
+    <details className="chart-table"><summary>{t("عرض البيانات كجدول", "View data table")}</summary><div className="table-scroll" tabIndex={0} role="region" aria-label={t("الدخل مقابل الإنفاق", "Income versus spending")}><table><thead><tr><th>{t("الشهر", "Month")}</th><th>{t("الدخل", "Income")}</th><th>{t("المصروفات", "Expenses")}</th></tr></thead><tbody>{data.map((r) => <tr key={r.key}><td>{r.label}</td><td>{money(r.income * 100, currency, locale)}</td><td>{money(r.expense * 100, currency, locale)}</td></tr>)}</tbody></table></div></details>
   </div>;
 }
 

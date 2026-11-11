@@ -1,0 +1,1122 @@
+{
+  "checkedAt": "2026-11-11T22:10:35.611Z",
+  "environment": "Local Chromium, no CPU/network throttling; isolated demo data",
+  "samples": [
+    {
+      "locale": "ar",
+      "theme": "light",
+      "width": 1440,
+      "route": "/",
+      "readyMs": 156,
+      "overflow": false,
+      "lcpMs": 84,
+      "transferBytes": 538717,
+      "fontBytes": 216056,
+      "violations": [],
+      "incompleteRules": [
+        "color-contrast"
+      ],
+      "manualReview": [
+        {
+          "id": "color-contrast",
+          "targets": [
+            [
+              ".preview-caption"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "locale": "ar",
+      "theme": "light",
+      "width": 1440,
+      "route": "/login",
+      "readyMs": 30,
+      "overflow": false,
+      "lcpMs": null,
+      "transferBytes": 0,
+      "fontBytes": 0,
+      "violations": [],
+      "incompleteRules": [],
+      "manualReview": []
+    },
+    {
+      "locale": "ar",
+      "theme": "light",
+      "width": 1440,
+      "route": "/register",
+      "readyMs": 21,
+      "overflow": false,
+      "lcpMs": null,
+      "transferBytes": 0,
+      "fontBytes": 0,
+      "violations": [],
+      "incompleteRules": [],
+      "manualReview": []
+    },
+    {
+      "locale": "ar",
+      "theme": "light",
+      "width": 1440,
+      "route": "/forgot-password",
+      "readyMs": 21,
+      "overflow": false,
+      "lcpMs": null,
+      "transferBytes": 0,
+      "fontBytes": 0,
+      "violations": [],
+      "incompleteRules": [],
+      "manualReview": []
+    },
+    {
+      "locale": "ar",
+      "theme": "light",
+      "width": 1440,
+      "route": "/app/dashboard",
+      "readyMs": 439,
+      "overflow": false,
+      "lcpMs": 92,
+      "transferBytes": 217532,
+      "fontBytes": 18528,
+      "violations": [],
+      "incompleteRules": [
+        "color-contrast"
+      ],
+      "manualReview": [
+        {
+          "id": "color-contrast",
+          "targets": [
+            [
+              ".light-pill"
+            ],
+            [
+              ".wealth-card > .stat-foot > span:nth-child(2)"
+            ],
+            [
+              "tspan[x=\"281.8\"][dy=\"0.71em\"]"
+            ],
+            [
+              "text[y=\"268\"] > tspan[dy=\"0.355em\"][x=\"49\"]"
+            ],
+            [
+              "text[y=\"203.5\"] > tspan[dy=\"0.355em\"][x=\"49\"]"
+            ],
+            [
+              "text[y=\"139\"] > tspan[dy=\"0.355em\"][x=\"49\"]"
+            ],
+            [
+              "text[y=\"74.5\"] > tspan[dy=\"0.355em\"][x=\"49\"]"
+            ],
+            [
+              ".recharts-cartesian-axis-tick-label.recharts-layer:nth-child(5) > text[width=\"55\"][orientation=\"left\"][text-anchor=\"end\"] > tspan[dy=\"0.355em\"][x=\"49\"]"
+            ],
+            [
+              ".donut-center > strong"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "locale": "ar",
+      "theme": "light",
+      "width": 1440,
+      "route": "/app/transactions",
+      "readyMs": 56,
+      "overflow": false,
+      "lcpMs": 28,
+      "transferBytes": 25009,
+      "fontBytes": 0,
+      "violations": [],
+      "incompleteRules": [],
+      "manualReview": []
+    },
+    {
+      "locale": "ar",
+      "theme": "light",
+      "width": 1440,
+      "route": "/app/accounts",
+      "readyMs": 58,
+      "overflow": false,
+      "lcpMs": 20,
+      "transferBytes": 26861,
+      "fontBytes": 0,
+      "violations": [],
+      "incompleteRules": [],
+      "manualReview": []
+    },
+    {
+      "locale": "ar",
+      "theme": "light",
+      "width": 1440,
+      "route": "/app/budgets",
+      "readyMs": 62,
+      "overflow": false,
+      "lcpMs": 28,
+      "transferBytes": 30980,
+      "fontBytes": 0,
+      "violations": [],
+      "incompleteRules": [],
+      "manualReview": []
+    },
+    {
+      "locale": "ar",
+      "theme": "light",
+      "width": 1440,
+      "route": "/app/goals",
+      "readyMs": 58,
+      "overflow": false,
+      "lcpMs": 20,
+      "transferBytes": 25006,
+      "fontBytes": 0,
+      "violations": [],
+      "incompleteRules": [],
+      "manualReview": []
+    },
+    {
+      "locale": "ar",
+      "theme": "light",
+      "width": 1440,
+      "route": "/app/recurring",
+      "readyMs": 61,
+      "overflow": false,
+      "lcpMs": 24,
+      "transferBytes": 36963,
+      "fontBytes": 0,
+      "violations": [],
+      "incompleteRules": [],
+      "manualReview": []
+    },
+    {
+      "locale": "ar",
+      "theme": "light",
+      "width": 1440,
+      "route": "/app/reports",
+      "readyMs": 386,
+      "overflow": false,
+      "lcpMs": 72,
+      "transferBytes": 38882,
+      "fontBytes": 0,
+      "violations": [],
+      "incompleteRules": [
+        "color-contrast"
+      ],
+      "manualReview": [
+        {
+          "id": "color-contrast",
+          "targets": [
+            [
+              "text[y=\"268\"] > tspan[dy=\"0.355em\"]"
+            ],
+            [
+              "text[y=\"203.5\"] > tspan[dy=\"0.355em\"]"
+            ],
+            [
+              "text[y=\"139\"] > tspan[dy=\"0.355em\"]"
+            ],
+            [
+              "text[y=\"74.5\"] > tspan[dy=\"0.355em\"]"
+            ],
+            [
+              ".recharts-cartesian-axis-tick-label.recharts-layer:nth-child(5) > text[width=\"55\"][orientation=\"left\"][text-anchor=\"end\"] > tspan[dy=\"0.355em\"]"
+            ],
+            [
+              ".donut-center > strong"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "locale": "ar",
+      "theme": "light",
+      "width": 1440,
+      "route": "/app/insights",
+      "readyMs": 64,
+      "overflow": false,
+      "lcpMs": 20,
+      "transferBytes": 36963,
+      "fontBytes": 0,
+      "violations": [],
+      "incompleteRules": [],
+      "manualReview": []
+    },
+    {
+      "locale": "ar",
+      "theme": "light",
+      "width": 1440,
+      "route": "/app/settings",
+      "readyMs": 123,
+      "overflow": false,
+      "lcpMs": 64,
+      "transferBytes": 38887,
+      "fontBytes": 0,
+      "violations": [],
+      "incompleteRules": [],
+      "manualReview": []
+    },
+    {
+      "locale": "ar",
+      "theme": "light",
+      "width": 1440,
+      "route": "/app/simulator",
+      "readyMs": 842,
+      "overflow": false,
+      "lcpMs": 380,
+      "transferBytes": 53407,
+      "fontBytes": 0,
+      "violations": [],
+      "incompleteRules": [],
+      "manualReview": []
+    },
+    {
+      "locale": "ar",
+      "theme": "light",
+      "width": 1440,
+      "route": "/app/savings",
+      "readyMs": 371,
+      "overflow": false,
+      "lcpMs": 68,
+      "transferBytes": 49490,
+      "fontBytes": 0,
+      "violations": [],
+      "incompleteRules": [],
+      "manualReview": []
+    },
+    {
+      "locale": "en",
+      "theme": "dark",
+      "width": 1440,
+      "route": "/",
+      "readyMs": 138,
+      "overflow": false,
+      "lcpMs": 120,
+      "transferBytes": 706019,
+      "fontBytes": 216056,
+      "violations": [],
+      "incompleteRules": [
+        "color-contrast"
+      ],
+      "manualReview": [
+        {
+          "id": "color-contrast",
+          "targets": [
+            [
+              "body > .landing > main > .preview-section > .preview-caption"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "locale": "en",
+      "theme": "dark",
+      "width": 1440,
+      "route": "/login",
+      "readyMs": 41,
+      "overflow": false,
+      "lcpMs": null,
+      "transferBytes": 951,
+      "fontBytes": 0,
+      "violations": [],
+      "incompleteRules": [],
+      "manualReview": []
+    },
+    {
+      "locale": "en",
+      "theme": "dark",
+      "width": 1440,
+      "route": "/register",
+      "readyMs": 35,
+      "overflow": false,
+      "lcpMs": null,
+      "transferBytes": 0,
+      "fontBytes": 0,
+      "violations": [],
+      "incompleteRules": [],
+      "manualReview": []
+    },
+    {
+      "locale": "en",
+      "theme": "dark",
+      "width": 1440,
+      "route": "/forgot-password",
+      "readyMs": 32,
+      "overflow": false,
+      "lcpMs": null,
+      "transferBytes": 4702,
+      "fontBytes": 0,
+      "violations": [],
+      "incompleteRules": [],
+      "manualReview": []
+    },
+    {
+      "locale": "en",
+      "theme": "dark",
+      "width": 1440,
+      "route": "/app/dashboard",
+      "readyMs": 433,
+      "overflow": false,
+      "lcpMs": 84,
+      "transferBytes": 216909,
+      "fontBytes": 18528,
+      "violations": [],
+      "incompleteRules": [
+        "color-contrast"
+      ],
+      "manualReview": [
+        {
+          "id": "color-contrast",
+          "targets": [
+            [
+              ".wealth-card > .stat-label > span"
+            ],
+            [
+              ".light-pill"
+            ],
+            [
+              ".wealth-card > .stat-foot > span:nth-child(2)"
+            ],
+            [
+              "tspan[dy=\"0.71em\"][x=\"57\"]"
+            ],
+            [
+              "tspan[x=\"169.4\"][dy=\"0.71em\"]"
+            ],
+            [
+              "tspan[x=\"281.8\"][dy=\"0.71em\"]"
+            ],
+            [
+              "tspan[x=\"394.20000000000005\"][dy=\"0.71em\"]"
+            ],
+            [
+              "tspan[x=\"506.6\"][dy=\"0.71em\"]"
+            ],
+            [
+              "tspan[x=\"616.28125\"][dy=\"0.71em\"]"
+            ],
+            [
+              "text[y=\"268\"] > tspan[dy=\"0.355em\"][x=\"49\"]"
+            ],
+            [
+              "text[y=\"203.5\"] > tspan[dy=\"0.355em\"][x=\"49\"]"
+            ],
+            [
+              "text[y=\"139\"] > tspan[dy=\"0.355em\"][x=\"49\"]"
+            ],
+            [
+              "text[y=\"74.5\"] > tspan[dy=\"0.355em\"][x=\"49\"]"
+            ],
+            [
+              ".recharts-cartesian-axis-tick-label.recharts-layer:nth-child(5) > text[width=\"55\"][orientation=\"left\"][text-anchor=\"end\"] > tspan[dy=\"0.355em\"][x=\"49\"]"
+            ],
+            [
+              ".donut-center > span"
+            ],
+            [
+              ".donut-center > strong"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "locale": "en",
+      "theme": "dark",
+      "width": 1440,
+      "route": "/app/transactions",
+      "readyMs": 68,
+      "overflow": false,
+      "lcpMs": 28,
+      "transferBytes": 29472,
+      "fontBytes": 0,
+      "violations": [],
+      "incompleteRules": [],
+      "manualReview": []
+    },
+    {
+      "locale": "en",
+      "theme": "dark",
+      "width": 1440,
+      "route": "/app/accounts",
+      "readyMs": 63,
+      "overflow": false,
+      "lcpMs": 56,
+      "transferBytes": 30848,
+      "fontBytes": 0,
+      "violations": [],
+      "incompleteRules": [],
+      "manualReview": []
+    },
+    {
+      "locale": "en",
+      "theme": "dark",
+      "width": 1440,
+      "route": "/app/budgets",
+      "readyMs": 45,
+      "overflow": false,
+      "lcpMs": 28,
+      "transferBytes": 24395,
+      "fontBytes": 0,
+      "violations": [],
+      "incompleteRules": [],
+      "manualReview": []
+    },
+    {
+      "locale": "en",
+      "theme": "dark",
+      "width": 1440,
+      "route": "/app/goals",
+      "readyMs": 68,
+      "overflow": false,
+      "lcpMs": 60,
+      "transferBytes": 34981,
+      "fontBytes": 0,
+      "violations": [],
+      "incompleteRules": [],
+      "manualReview": []
+    },
+    {
+      "locale": "en",
+      "theme": "dark",
+      "width": 1440,
+      "route": "/app/recurring",
+      "readyMs": 57,
+      "overflow": false,
+      "lcpMs": 48,
+      "transferBytes": 35511,
+      "fontBytes": 0,
+      "violations": [],
+      "incompleteRules": [],
+      "manualReview": []
+    },
+    {
+      "locale": "en",
+      "theme": "dark",
+      "width": 1440,
+      "route": "/app/reports",
+      "readyMs": 374,
+      "overflow": false,
+      "lcpMs": 52,
+      "transferBytes": 38269,
+      "fontBytes": 0,
+      "violations": [],
+      "incompleteRules": [
+        "color-contrast"
+      ],
+      "manualReview": [
+        {
+          "id": "color-contrast",
+          "targets": [
+            [
+              "tspan[dy=\"0.71em\"]"
+            ],
+            [
+              "text[y=\"268\"] > tspan[dy=\"0.355em\"]"
+            ],
+            [
+              "text[y=\"203.5\"] > tspan[dy=\"0.355em\"]"
+            ],
+            [
+              "text[y=\"139\"] > tspan[dy=\"0.355em\"]"
+            ],
+            [
+              "text[y=\"74.5\"] > tspan[dy=\"0.355em\"]"
+            ],
+            [
+              ".recharts-cartesian-axis-tick-label.recharts-layer:nth-child(5) > text[width=\"55\"][orientation=\"left\"][text-anchor=\"end\"] > tspan[dy=\"0.355em\"]"
+            ],
+            [
+              ".donut-center > span"
+            ],
+            [
+              ".donut-center > strong"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "locale": "en",
+      "theme": "dark",
+      "width": 1440,
+      "route": "/app/insights",
+      "readyMs": 51,
+      "overflow": false,
+      "lcpMs": 28,
+      "transferBytes": 36347,
+      "fontBytes": 0,
+      "violations": [],
+      "incompleteRules": [],
+      "manualReview": []
+    },
+    {
+      "locale": "en",
+      "theme": "dark",
+      "width": 1440,
+      "route": "/app/settings",
+      "readyMs": 50,
+      "overflow": false,
+      "lcpMs": 28,
+      "transferBytes": 38263,
+      "fontBytes": 0,
+      "violations": [],
+      "incompleteRules": [],
+      "manualReview": []
+    },
+    {
+      "locale": "en",
+      "theme": "dark",
+      "width": 1440,
+      "route": "/app/simulator",
+      "readyMs": 354,
+      "overflow": false,
+      "lcpMs": 352,
+      "transferBytes": 38926,
+      "fontBytes": 0,
+      "violations": [],
+      "incompleteRules": [],
+      "manualReview": []
+    },
+    {
+      "locale": "en",
+      "theme": "dark",
+      "width": 1440,
+      "route": "/app/savings",
+      "readyMs": 366,
+      "overflow": false,
+      "lcpMs": 360,
+      "transferBytes": 48873,
+      "fontBytes": 0,
+      "violations": [],
+      "incompleteRules": [],
+      "manualReview": []
+    },
+    {
+      "locale": "he",
+      "theme": "light",
+      "width": 390,
+      "route": "/",
+      "readyMs": 134,
+      "overflow": false,
+      "lcpMs": 64,
+      "transferBytes": 518926,
+      "fontBytes": 216056,
+      "violations": [],
+      "incompleteRules": [
+        "color-contrast"
+      ],
+      "manualReview": [
+        {
+          "id": "color-contrast",
+          "targets": [
+            [
+              ".preview-caption"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "locale": "he",
+      "theme": "light",
+      "width": 390,
+      "route": "/app/dashboard",
+      "readyMs": 99,
+      "overflow": false,
+      "lcpMs": 72,
+      "transferBytes": 209499,
+      "fontBytes": 18528,
+      "violations": [],
+      "incompleteRules": [
+        "color-contrast"
+      ],
+      "manualReview": [
+        {
+          "id": "color-contrast",
+          "targets": [
+            [
+              ".wealth-card > .stat-label > span"
+            ],
+            [
+              ".light-pill"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "locale": "he",
+      "theme": "light",
+      "width": 390,
+      "route": "/app/transactions",
+      "readyMs": 49,
+      "overflow": false,
+      "lcpMs": 32,
+      "transferBytes": 24876,
+      "fontBytes": 0,
+      "violations": [],
+      "incompleteRules": [],
+      "manualReview": []
+    },
+    {
+      "locale": "he",
+      "theme": "light",
+      "width": 390,
+      "route": "/app/accounts",
+      "readyMs": 50,
+      "overflow": false,
+      "lcpMs": 24,
+      "transferBytes": 38746,
+      "fontBytes": 0,
+      "violations": [],
+      "incompleteRules": [],
+      "manualReview": []
+    },
+    {
+      "locale": "he",
+      "theme": "light",
+      "width": 390,
+      "route": "/app/budgets",
+      "readyMs": 62,
+      "overflow": false,
+      "lcpMs": 24,
+      "transferBytes": 36841,
+      "fontBytes": 0,
+      "violations": [],
+      "incompleteRules": [],
+      "manualReview": []
+    },
+    {
+      "locale": "he",
+      "theme": "light",
+      "width": 390,
+      "route": "/app/goals",
+      "readyMs": 55,
+      "overflow": false,
+      "lcpMs": 44,
+      "transferBytes": 38750,
+      "fontBytes": 0,
+      "violations": [],
+      "incompleteRules": [],
+      "manualReview": []
+    },
+    {
+      "locale": "he",
+      "theme": "light",
+      "width": 390,
+      "route": "/app/recurring",
+      "readyMs": 52,
+      "overflow": false,
+      "lcpMs": 24,
+      "transferBytes": 38743,
+      "fontBytes": 0,
+      "violations": [],
+      "incompleteRules": [],
+      "manualReview": []
+    },
+    {
+      "locale": "he",
+      "theme": "light",
+      "width": 390,
+      "route": "/app/reports",
+      "readyMs": 364,
+      "overflow": false,
+      "lcpMs": 48,
+      "transferBytes": 38750,
+      "fontBytes": 0,
+      "violations": [],
+      "incompleteRules": [
+        "color-contrast"
+      ],
+      "manualReview": [
+        {
+          "id": "color-contrast",
+          "targets": [
+            [
+              "tspan[dy=\"0.71em\"]"
+            ],
+            [
+              "text[y=\"210\"] > tspan[dy=\"0.355em\"]"
+            ],
+            [
+              "text[y=\"160\"] > tspan[dy=\"0.355em\"]"
+            ],
+            [
+              "text[y=\"110\"] > tspan[dy=\"0.355em\"]"
+            ],
+            [
+              "text[y=\"60\"] > tspan[dy=\"0.355em\"]"
+            ],
+            [
+              ".recharts-cartesian-axis-tick-label.recharts-layer:nth-child(5) > text[width=\"55\"][orientation=\"left\"][text-anchor=\"end\"] > tspan[dy=\"0.355em\"]"
+            ],
+            [
+              ".donut-center > span"
+            ],
+            [
+              ".donut-center > strong"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "locale": "he",
+      "theme": "light",
+      "width": 390,
+      "route": "/app/insights",
+      "readyMs": 51,
+      "overflow": false,
+      "lcpMs": 24,
+      "transferBytes": 38753,
+      "fontBytes": 0,
+      "violations": [],
+      "incompleteRules": [],
+      "manualReview": []
+    },
+    {
+      "locale": "he",
+      "theme": "light",
+      "width": 390,
+      "route": "/app/settings",
+      "readyMs": 56,
+      "overflow": false,
+      "lcpMs": 16,
+      "transferBytes": 38749,
+      "fontBytes": 0,
+      "violations": [],
+      "incompleteRules": [],
+      "manualReview": []
+    },
+    {
+      "locale": "he",
+      "theme": "light",
+      "width": 390,
+      "route": "/app/simulator",
+      "readyMs": 341,
+      "overflow": false,
+      "lcpMs": 40,
+      "transferBytes": 39405,
+      "fontBytes": 0,
+      "violations": [],
+      "incompleteRules": [],
+      "manualReview": []
+    },
+    {
+      "locale": "he",
+      "theme": "light",
+      "width": 390,
+      "route": "/app/savings",
+      "readyMs": 372,
+      "overflow": false,
+      "lcpMs": 348,
+      "transferBytes": 49349,
+      "fontBytes": 0,
+      "violations": [],
+      "incompleteRules": [],
+      "manualReview": []
+    },
+    {
+      "locale": "de",
+      "theme": "dark",
+      "width": 320,
+      "route": "/",
+      "readyMs": 105,
+      "overflow": false,
+      "lcpMs": 88,
+      "transferBytes": 530221,
+      "fontBytes": 216056,
+      "violations": [],
+      "incompleteRules": [],
+      "manualReview": []
+    },
+    {
+      "locale": "de",
+      "theme": "dark",
+      "width": 320,
+      "route": "/app/dashboard",
+      "readyMs": 113,
+      "overflow": false,
+      "lcpMs": 84,
+      "transferBytes": 209584,
+      "fontBytes": 18528,
+      "violations": [],
+      "incompleteRules": [
+        "color-contrast"
+      ],
+      "manualReview": [
+        {
+          "id": "color-contrast",
+          "targets": [
+            [
+              ".light-pill"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "locale": "de",
+      "theme": "dark",
+      "width": 320,
+      "route": "/app/transactions",
+      "readyMs": 70,
+      "overflow": false,
+      "lcpMs": 64,
+      "transferBytes": 35054,
+      "fontBytes": 0,
+      "violations": [],
+      "incompleteRules": [],
+      "manualReview": []
+    },
+    {
+      "locale": "de",
+      "theme": "dark",
+      "width": 320,
+      "route": "/app/accounts",
+      "readyMs": 62,
+      "overflow": false,
+      "lcpMs": 44,
+      "transferBytes": 38348,
+      "fontBytes": 0,
+      "violations": [],
+      "incompleteRules": [],
+      "manualReview": []
+    },
+    {
+      "locale": "de",
+      "theme": "dark",
+      "width": 320,
+      "route": "/app/budgets",
+      "readyMs": 55,
+      "overflow": false,
+      "lcpMs": 40,
+      "transferBytes": 29555,
+      "fontBytes": 0,
+      "violations": [],
+      "incompleteRules": [],
+      "manualReview": []
+    },
+    {
+      "locale": "de",
+      "theme": "dark",
+      "width": 320,
+      "route": "/app/goals",
+      "readyMs": 54,
+      "overflow": false,
+      "lcpMs": 20,
+      "transferBytes": 30457,
+      "fontBytes": 0,
+      "violations": [],
+      "incompleteRules": [],
+      "manualReview": []
+    },
+    {
+      "locale": "de",
+      "theme": "dark",
+      "width": 320,
+      "route": "/app/recurring",
+      "readyMs": 55,
+      "overflow": false,
+      "lcpMs": 44,
+      "transferBytes": 38349,
+      "fontBytes": 0,
+      "violations": [],
+      "incompleteRules": [],
+      "manualReview": []
+    },
+    {
+      "locale": "de",
+      "theme": "dark",
+      "width": 320,
+      "route": "/app/reports",
+      "readyMs": 379,
+      "overflow": false,
+      "lcpMs": 52,
+      "transferBytes": 38351,
+      "fontBytes": 0,
+      "violations": [],
+      "incompleteRules": [
+        "color-contrast"
+      ],
+      "manualReview": [
+        {
+          "id": "color-contrast",
+          "targets": [
+            [
+              "tspan[dy=\"0.71em\"]"
+            ],
+            [
+              "text[y=\"190\"] > tspan[dy=\"0.355em\"]"
+            ],
+            [
+              "text[y=\"145\"] > tspan[dy=\"0.355em\"]"
+            ],
+            [
+              "text[y=\"100\"] > tspan[dy=\"0.355em\"]"
+            ],
+            [
+              "text[y=\"55\"] > tspan[dy=\"0.355em\"]"
+            ],
+            [
+              ".recharts-cartesian-axis-tick-label.recharts-layer:nth-child(5) > text[width=\"55\"][orientation=\"left\"][text-anchor=\"end\"] > tspan[dy=\"0.355em\"]"
+            ],
+            [
+              ".donut-center > span"
+            ],
+            [
+              ".donut-center > strong"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "locale": "de",
+      "theme": "dark",
+      "width": 320,
+      "route": "/app/insights",
+      "readyMs": 790,
+      "overflow": false,
+      "lcpMs": 772,
+      "transferBytes": 38349,
+      "fontBytes": 0,
+      "violations": [],
+      "incompleteRules": [],
+      "manualReview": []
+    },
+    {
+      "locale": "de",
+      "theme": "dark",
+      "width": 320,
+      "route": "/app/settings",
+      "readyMs": 62,
+      "overflow": false,
+      "lcpMs": 48,
+      "transferBytes": 38352,
+      "fontBytes": 0,
+      "violations": [],
+      "incompleteRules": [],
+      "manualReview": []
+    },
+    {
+      "locale": "de",
+      "theme": "dark",
+      "width": 320,
+      "route": "/app/simulator",
+      "readyMs": 356,
+      "overflow": false,
+      "lcpMs": 44,
+      "transferBytes": 39011,
+      "fontBytes": 0,
+      "violations": [],
+      "incompleteRules": [],
+      "manualReview": []
+    },
+    {
+      "locale": "de",
+      "theme": "dark",
+      "width": 320,
+      "route": "/app/savings",
+      "readyMs": 372,
+      "overflow": false,
+      "lcpMs": 348,
+      "transferBytes": 48960,
+      "fontBytes": 0,
+      "violations": [],
+      "incompleteRules": [],
+      "manualReview": []
+    },
+    {
+      "locale": "ar",
+      "theme": "light",
+      "width": 768,
+      "route": "/",
+      "readyMs": 182,
+      "overflow": false,
+      "lcpMs": 80,
+      "transferBytes": 540618,
+      "fontBytes": 216056,
+      "violations": [],
+      "incompleteRules": [],
+      "manualReview": []
+    },
+    {
+      "locale": "ar",
+      "theme": "light",
+      "width": 768,
+      "route": "/app/dashboard",
+      "readyMs": 849,
+      "overflow": false,
+      "lcpMs": 376,
+      "transferBytes": 217532,
+      "fontBytes": 18528,
+      "violations": [],
+      "incompleteRules": [
+        "color-contrast"
+      ],
+      "manualReview": [
+        {
+          "id": "color-contrast",
+          "targets": [
+            [
+              ".light-pill"
+            ],
+            [
+              "tspan[x=\"230.2\"][dy=\"0.71em\"]"
+            ],
+            [
+              "text[y=\"268\"] > tspan[dy=\"0.355em\"][x=\"49\"]"
+            ],
+            [
+              "text[y=\"203.5\"] > tspan[dy=\"0.355em\"][x=\"49\"]"
+            ],
+            [
+              "text[y=\"139\"] > tspan[dy=\"0.355em\"][x=\"49\"]"
+            ],
+            [
+              "text[y=\"74.5\"] > tspan[dy=\"0.355em\"][x=\"49\"]"
+            ],
+            [
+              ".recharts-cartesian-axis-tick-label.recharts-layer:nth-child(5) > text[width=\"55\"][orientation=\"left\"][text-anchor=\"end\"] > tspan[dy=\"0.355em\"][x=\"49\"]"
+            ],
+            [
+              ".donut-center > strong"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "locale": "ar",
+      "theme": "light",
+      "width": 768,
+      "route": "/app/transactions",
+      "readyMs": 113,
+      "overflow": false,
+      "lcpMs": 68,
+      "transferBytes": 38887,
+      "fontBytes": 0,
+      "violations": [],
+      "incompleteRules": [],
+      "manualReview": []
+    },
+    {
+      "locale": "ar",
+      "theme": "light",
+      "width": 768,
+      "route": "/app/savings",
+      "readyMs": 439,
+      "overflow": false,
+      "lcpMs": 384,
+      "transferBytes": 49485,
+      "fontBytes": 0,
+      "violations": [],
+      "incompleteRules": [],
+      "manualReview": []
+    }
+  ],
+  "errors": []
+}
