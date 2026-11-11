@@ -27,13 +27,13 @@ Review window: 11–12 November 2026. The existing product, ledger and approved 
 | Actual process stop/start | Passed: persisted session, exact balance, ledger and retry identity; isolated demo removed afterward |
 | Production browser workflows | **23 passed** against the final production build, including narrow-table keyboard navigation |
 | All-page browser/layout/accessibility review | **58 page/profile samples passed**: no reported Axe violations, no page overflow, no browser runtime/console errors; 15 fresh captures |
-| PostgreSQL 17 / Linux CI | Check the Actions run associated with the delivered commit; publication verification pending |
+| PostgreSQL 17 / Linux CI | **Passed** on implementation commit `37c55a09760184ae1bc8034063624de67020105a`: [both CI jobs](https://github.com/sami1507/mizan-finance-web/actions/runs/43110075031), including 23 browser tests and actual restart persistence |
 
 Tests cover `5,000 + 2,000 − 300 = 6,700`, transfer conservation, transaction edits/deletes, goal allocations without double subtraction, recurring/import deduplication, concurrent writes, cross-user references, atomic failure, CSV formula-like notes, failed network responses and session recovery. The four-language calculator/simulator cases cover zero/invalid inputs, explicit overlaps, exact rounding, currency isolation and hypothetical-only state.
 
 The SMTP tests use a real loopback SMTP protocol peer and the actual Better Auth HTTP handler. They check rejection, reset redirects, one-time token use, password change and session revocation. They prove controlled integration behavior, not a real provider account.
 
-Browser checks use Chromium and isolated sample data. Axe scans use WCAG 2/2.1 A/AA tags without exclusions; automated checks do not establish full accessibility conformance. Chart/image contrast can require manual review, so the brand guide separately records measured text-token contrast and exact chart tables remain available. Real screenshots were visually inspected for hierarchy, typography, RTL/LTR and narrow-screen layout.
+Browser checks use Chromium and isolated sample data. Axe scans use WCAG 2/2.1 A/AA tags without exclusions; automated checks do not establish full accessibility conformance. The incomplete contrast items received a [manual follow-up](verification/contrast-review.md) using browser-computed colors and reviewed screenshots: actual sampled ratios were 5.23:1–14.30:1, with no observed text/background overlap at the tested values. Incomplete entries remain in the raw audit rather than being hidden. Exact chart tables remain available. Real screenshots were visually inspected for hierarchy, typography, RTL/LTR and narrow-screen layout.
 
 ## Performance and operating limits
 
@@ -62,4 +62,4 @@ Exact variables, callback paths, provider requirements and verification steps: [
 - [Focused source/security findings](QA_REVIEW.md), [acceptance/state record](../PROJECT_STATE.md), [simulator research](simulator-research.md), [simulator model](simulator-model.md), [savings model](savings-capacity-model.md).
 - Reproduce visual evidence with `CAPTURE_URL` pointing to a local production preview and `npm run review:delivery`. Detailed raw results are generated under ignored `test-results/`; the reviewed run is preserved in `docs/verification/delivery-browser-audit.json`.
 
-No known blocking financial-flow or data-isolation defect remained in the completed checks. Local acceptance checks and the final visual audit passed. Remote CI is verified against the delivered commit separately. The correct status remains **ready for configuration and live verification**, until the owner's external acceptance checks pass.
+No known blocking financial-flow or data-isolation defect remained in the completed checks. Local acceptance checks and the final visual audit passed. The implementation also passed both remote CI jobs; the [recorded run](https://github.com/sami1507/mizan-finance-web/actions/runs/43110075031) identifies its exact SHA. Documentation-only follow-up commits retain that implementation and have their own Actions checks. The correct status remains **ready for configuration and live verification**, until the owner's external acceptance checks pass.
