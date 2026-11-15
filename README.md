@@ -1,6 +1,37 @@
 # Mizan Finance | ميزان
 
-A four-language personal finance application built with Next.js, TypeScript, Tailwind CSS, Drizzle ORM and Better Auth. Arabic is the default; Arabic and Hebrew use RTL, while English and German use LTR. All four languages support light/dark themes and ILS/USD/EUR.
+**Understand your money. Plan your spending. See what you can save.**
+
+Mizan Finance is a full-stack personal finance application for people who want a clear view of their balances, everyday spending, upcoming commitments and savings goals. It brings manual accounts, transactions, budgets and reports into one workspace, with tools to explore a financial decision before changing the actual ledger.
+
+The application supports **Arabic, English, Hebrew and German**, with right-to-left and left-to-right layouts, light and dark themes, and ILS, USD and EUR. Different currencies are shown separately rather than combined using an assumed exchange rate.
+
+![Mizan Finance dashboard in English, showing isolated sample data](public/dashboard-preview-en.png)
+
+*A screenshot of the running application with synthetic demo data. This repository contains the application source; making it public does not create a hosted service or expose a user's financial database.*
+
+## What you can do
+
+- **Track your money:** create bank, cash and wallet accounts; record income and expenses; search, filter and edit transactions; transfer money between accounts in the same currency.
+- **Plan your month:** set category budgets, see spending against each limit, and review upcoming recurring income and expenses. Scheduled items become ledger entries only when explicitly processed.
+- **Work toward savings goals:** allocate existing funds to goals and track progress without counting those allocations as expenses.
+- **Calculate monthly savings capacity:** enter income, itemized expenses and an optional reserve, or start from recorded monthly transactions. See the maximum conditional saving, the amount after your reserve, and any shortfall.
+- **Compare a decision:** use the what-if simulator to explore a purchase and changes in daily spending over 30, 60 or 90 days. Compare projected balances and reserve breaches against a baseline without changing your records.
+- **Understand and manage your data:** inspect interactive charts and exact tables, read calculated spending insights, keep financial notes, import CSV with preview and duplicate detection, and export CSV/JSON or print a report.
+
+## How it works
+
+Next.js and TypeScript power the interface and server routes. Tailwind CSS and shared design tokens define the visual system; Recharts provides the interactive charts. Better Auth manages email/password authentication and sessions, while Drizzle ORM connects the server to PostgreSQL. Local development can use persistent PGlite without an external database service.
+
+Financial calculations use integer minor units. The server derives the acting user from the session, checks record ownership, and commits related changes atomically. Persisted retry identities prevent an unchanged request from being posted twice after a lost response. Financial records stay in the server database; browser storage holds presentation preferences only.
+
+**Scope:** accounts are entered manually. Mizan does not connect to banks, move real money, convert currencies or provide investment advice. Calculator and simulator results are conditional estimates with visible assumptions. Production hosting, PostgreSQL and optional SMTP delivery must be configured and verified in the operator's own environment.
+
+**Explore:** [Run locally](#run-locally) · [Savings calculator](#monthly-savings-capacity--حاسبة-الادخار) · [Architecture](#architecture) · [Service setup](docs/API_SETUP.md) · [Screenshots](#screenshots)
+
+## Languages and interface
+
+Arabic is the default language. Arabic and Hebrew use RTL, while English and German use LTR. All four languages support light/dark themes and ILS/USD/EUR.
 
 Start with this README, then [service configuration](docs/API_SETUP.md), [operations, backups and recovery](docs/OPERATIONS.md), [brand assets and design tokens](docs/BRAND.md), and [delivery evidence](docs/DELIVERY_REPORT.md). [PROJECT_STATE.md](PROJECT_STATE.md) records the acceptance map and remaining provider checks. The source is prepared for configuration and live verification; no public deployment or real provider inbox has been verified on the owner's behalf.
 
